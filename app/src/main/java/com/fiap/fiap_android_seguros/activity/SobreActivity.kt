@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
 
-class LoginActivity : AppCompatActivity() {
+class SobreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-    }
+        setContentView(R.layout.activity_sobre)
 
+    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

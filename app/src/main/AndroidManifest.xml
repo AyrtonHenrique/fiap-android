@@ -9,13 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Androidseguros">
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SobreActivity">
+
+        </activity>
+        <activity android:name=".activity.FalarCorretorActivity" >
+
+
+        </activity>
+        <activity android:name=".activity.MensagensEnviadasActivity" >
+
+        </activity>
+        <activity android:name=".activity.UsuarioActivity" >
+
+        </activity>
+        <activity android:name=".activity.NovoCadastroActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.LoginActivity">
+
+        </activity>
+        <activity android:name=".activity.MainActivity" >
+
         </activity>
     </application>
 

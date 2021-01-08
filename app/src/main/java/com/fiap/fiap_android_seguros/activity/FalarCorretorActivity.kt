@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
 
-class LoginActivity : AppCompatActivity() {
+class FalarCorretorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_falar_corretor)
     }
 
 
