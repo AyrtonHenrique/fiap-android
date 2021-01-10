@@ -1,15 +1,27 @@
 package com.fiap.fiap_android_seguros.ui.sobre
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_sobre.*
+
 
 class SobreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sobre)
 
+        startListeners()
+    }
+
+    private fun startListeners() {
+        ivVoltar.setOnClickListener{
+            startActivity(Intent(this, UsuarioActivity::class.java))
+            finish()
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

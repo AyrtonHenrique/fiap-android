@@ -1,16 +1,61 @@
 package com.fiap.fiap_android_seguros.ui.usuario
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.activity.LoginActivity
+import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
+import kotlinx.android.synthetic.main.activity_novo_cadastro.*
+import kotlinx.android.synthetic.main.activity_usuario.*
 
 class UsuarioActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usuario)
+        startListeners()
     }
 
+    private fun startListeners() {
+        btSair.setOnClickListener{
+            showDialog()
+        }
+
+        btSobre.setOnClickListener{
+            startActivity(Intent(this, SobreActivity::class.java))
+        }
+    }
+
+    fun Context.toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showDialog() {
+        lateinit var dialog: AlertDialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Fechar Aplicativo")
+        builder.setMessage("Tem certeza que gostaria de fechar a sua sessão?")
+
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+            }
+        }
+        builder.setPositiveButton("Sim", dialogClickListener)
+        builder.setNeutralButton("Cancelar", dialogClickListener)
+
+        dialog = builder.create()
+        dialog.show()
+    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

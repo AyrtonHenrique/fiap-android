@@ -1,14 +1,27 @@
 package com.fiap.fiap_android_seguros.ui.usuario
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.activity.LoginActivity
+import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 
 class NovoCadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_cadastro)
+
+        startListeners()
+
+    }
+
+    private fun startListeners() {
+        ivBack.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
 

@@ -11,6 +11,7 @@ import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.models.RequestState
 import com.fiap.fiap_android_seguros.models.Usuario
 import com.fiap.fiap_android_seguros.ui.login.LoginViewModel
+import com.fiap.fiap_android_seguros.ui.usuario.NovoCadastroActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -46,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+
     }
 
     private fun iniciarViewModel() {
@@ -59,6 +61,11 @@ class LoginActivity : AppCompatActivity() {
                 etEmail.text.toString(),
                     etSenha.text.toString()
             ))
+        }
+
+
+        tvNovoCadastro.setOnClickListener{
+            startActivity((Intent(this, NovoCadastroActivity::class.java)))
         }
     }
 
