@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".activity.NovoCadastroActivity">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/verde_agua"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +65,16 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
-        android:layout_width="302dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
@@ -87,7 +106,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Endereço"
@@ -98,8 +117,9 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
-        android:layout_width="302dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
+        android:background="@drawable/button_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -109,7 +129,7 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Idade"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
@@ -119,7 +139,7 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Nome de usuário"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName6"
@@ -129,8 +149,9 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
-        android:layout_width="302dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
+        android:background="@drawable/button_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
@@ -140,7 +161,7 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Senha"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
@@ -150,8 +171,9 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
-        android:layout_width="302dp"
+        android:layout_width="0dp"
         android:layout_height="41dp"
+        android:background="@drawable/button_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
@@ -165,6 +187,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Cadastrar"
+        android:background="@drawable/button_style"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
@@ -172,8 +195,9 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName6"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
@@ -182,3 +206,4 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
