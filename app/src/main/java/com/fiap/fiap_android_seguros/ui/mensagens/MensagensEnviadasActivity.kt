@@ -1,14 +1,27 @@
 package com.fiap.fiap_android_seguros.ui.mensagens
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
+import kotlinx.android.synthetic.main.activity_usuario.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mensagens_enviadas)
+        startListeners()
+    }
+
+    private fun startListeners() {
+
+        ivVoltar2.setOnClickListener {
+            startActivity(Intent(this, UsuarioActivity::class.java))
+        }
     }
 
 

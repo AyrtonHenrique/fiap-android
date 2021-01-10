@@ -1,16 +1,24 @@
 package com.fiap.fiap_android_seguros.ui.usuario
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import kotlinx.android.synthetic.main.activity_falar_corretor.*
 
 class FalarCorretorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_falar_corretor)
+        startListeners()
     }
 
+    private fun startListeners() {
+        ivVoltar4.setOnClickListener {
+            startActivity(Intent(this, UsuarioActivity::class.java))
+        }
+    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

@@ -8,193 +8,189 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.usuario.UsuarioActivity">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="173dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/verde_agua_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.usuario.UsuarioActivity">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="173dp"
+            android:background="@color/verde_agua_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/tela_usuario_header" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <ImageView
-        android:id="@+id/ivMeusDados"
-        android:layout_width="68dp"
-        android:layout_height="71dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999"
-        app:srcCompat="@drawable/user_icon" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/tela_usuario_header" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Maria Isabel Silva"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        <ImageView
+            android:id="@+id/ivMeusDados"
+            android:layout_width="68dp"
+            android:layout_height="71dp"
+            android:layout_marginTop="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user_icon" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="64 anos"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:text="Maria Isabel Silva"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.64"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Plano Atual:"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/ivMeusDados"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ivMeusDados"
-        app:layout_constraintTop_toBottomOf="@+id/ivMeusDados" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="64 anos"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Validade:"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Plano Atual:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ivMeusDados"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/ivMeusDados"
+            app:layout_constraintTop_toBottomOf="@+id/ivMeusDados" />
 
-    <ImageView
-        android:id="@+id/ivFalarCorretor"
-        android:layout_width="95dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="8dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/corretor_icon" />
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Validade:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="Falar com um Corretor"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        <ImageView
+            android:id="@+id/ivFalarCorretor"
+            android:layout_width="95dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="24dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvFalarCorretor"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            app:srcCompat="@drawable/corretor_icon" />
 
-    <ImageView
-        android:id="@+id/ivPesquisarPlanos"
-        android:layout_width="0dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivFalarCorretor"
-        app:layout_constraintStart_toStartOf="@+id/ivFalarCorretor"
-        app:layout_constraintTop_toBottomOf="@+id/ivFalarCorretor"
-        app:srcCompat="@drawable/search_icon" />
+        <TextView
+            android:id="@+id/tvFalarCorretor"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:text="Falar com um Corretor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivFalarCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="208dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="80dp"
-        android:text="Pesquisar Planos de Saúde"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <ImageView
+            android:id="@+id/ivPesquisarPlanos"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivFalarCorretor"
+            app:layout_constraintStart_toStartOf="@+id/ivFalarCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/ivFalarCorretor"
+            app:srcCompat="@drawable/search_icon" />
 
-    <ImageView
-        android:id="@+id/ivGerenciarMensagens"
-        android:layout_width="0dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPesquisarPlanos"
-        app:layout_constraintStart_toStartOf="@+id/ivPesquisarPlanos"
-        app:layout_constraintTop_toBottomOf="@+id/ivPesquisarPlanos"
-        app:srcCompat="@drawable/mensagens_icon" />
+        <TextView
+            android:id="@+id/tvPesquisarPlano"
+            android:layout_width="208dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="60dp"
+            android:text="Pesquisar Planos de Saúde"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvFalarCorretor"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvFalarCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/tvFalarCorretor" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="269dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="30dp"
-        android:text="Gerenciar Mensagens Enviadas"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        <ImageView
+            android:id="@+id/ivGerenciarMensagens"
+            android:layout_width="0dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivPesquisarPlanos"
+            app:layout_constraintStart_toStartOf="@+id/ivPesquisarPlanos"
+            app:layout_constraintTop_toBottomOf="@+id/ivPesquisarPlanos"
+            app:srcCompat="@drawable/mensagens_icon" />
 
-    <Button
-        android:id="@+id/btSobre"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Sobre"
-        android:background="@drawable/button_style"
-        app:layout_constraintEnd_toStartOf="@+id/btSair"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
+        <TextView
+            android:id="@+id/tvGerenciarMensagens"
+            android:layout_width="269dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="40dp"
+            android:text="Gerenciar Mensagens Enviadas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvPesquisarPlano"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="@+id/tvPesquisarPlano"
+            app:layout_constraintTop_toBottomOf="@+id/tvPesquisarPlano" />
 
-    <Button
-        android:id="@+id/btSair"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Sair"
-        android:background="@drawable/button_style"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btSobre"
-        app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
+        <Button
+            android:id="@+id/btSobre"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_style"
+            android:text="Sobre"
+            app:layout_constraintEnd_toStartOf="@+id/btSair"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
+
+        <Button
+            android:id="@+id/btSair"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_style"
+            android:text="Sair"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btSobre"
+            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -206,5 +202,5 @@
             app:layout_constraintTop_toBottomOf="@+id/btSobre">
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

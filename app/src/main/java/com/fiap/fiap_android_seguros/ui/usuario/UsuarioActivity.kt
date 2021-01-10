@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.activity.LoginActivity
+import com.fiap.fiap_android_seguros.activity.MainActivity
+import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
 import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 import kotlinx.android.synthetic.main.activity_usuario.*
@@ -26,9 +28,29 @@ class UsuarioActivity : AppCompatActivity() {
         btSair.setOnClickListener{
             showDialog()
         }
-
         btSobre.setOnClickListener{
             startActivity(Intent(this, SobreActivity::class.java))
+        }
+
+        ivFalarCorretor.setOnClickListener {
+            startActivity(Intent(this, FalarCorretorActivity::class.java))
+        }
+        tvFalarCorretor.setOnClickListener {
+            startActivity(Intent(this, FalarCorretorActivity::class.java))
+        }
+
+        ivPesquisarPlanos.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        tvPesquisarPlano.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        ivGerenciarMensagens.setOnClickListener {
+            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+        }
+        tvGerenciarMensagens.setOnClickListener {
+            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
         }
     }
 
