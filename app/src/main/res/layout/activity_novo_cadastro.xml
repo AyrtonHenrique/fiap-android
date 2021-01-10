@@ -66,10 +66,10 @@
     <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="43dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/field_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
@@ -119,7 +119,7 @@
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="0dp"
         android:layout_height="43dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/field_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -150,8 +150,8 @@
     <EditText
         android:id="@+id/editTextTextPersonName4"
         android:layout_width="0dp"
-        android:layout_height="47dp"
-        android:background="@drawable/button_style"
+        android:layout_height="43dp"
+        android:background="@drawable/field_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
@@ -172,8 +172,8 @@
     <EditText
         android:id="@+id/editTextTextPersonName5"
         android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:background="@drawable/button_style"
+        android:layout_height="50dp"
+        android:background="@drawable/field_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
@@ -183,21 +183,34 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
-        android:text="Cadastrar"
+        android:layout_marginEnd="64dp"
         android:background="@drawable/button_style"
+        android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <EditText
         android:id="@+id/editTextTextPersonName6"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_style"
+        android:layout_height="43dp"
+        android:background="@drawable/field_style"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
