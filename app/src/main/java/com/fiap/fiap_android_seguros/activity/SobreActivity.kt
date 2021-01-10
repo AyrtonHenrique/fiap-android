@@ -14,7 +14,7 @@ class SobreActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
+        hideSystemUI()
     }
 
     private fun hideSystemUI() {
