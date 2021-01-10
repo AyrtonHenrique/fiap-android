@@ -1,14 +1,14 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.mensagens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
 
-class FalarCorretorActivity : AppCompatActivity() {
+class MensagensEnviadasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_falar_corretor)
+        setContentView(R.layout.activity_mensagens_enviadas)
     }
 
 

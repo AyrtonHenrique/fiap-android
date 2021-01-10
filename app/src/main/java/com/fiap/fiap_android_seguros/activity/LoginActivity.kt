@@ -1,12 +1,22 @@
 package com.fiap.fiap_android_seguros.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.models.RequestState
+import com.fiap.fiap_android_seguros.models.Usuario
+import com.fiap.fiap_android_seguros.ui.login.LoginViewModel
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +25,41 @@ class LoginActivity : AppCompatActivity() {
         // Inicia escondendo o teclado
         hideKeyboard()
 
+        startListeners()
+        iniciarViewModel()
+        iniciarObserver()
+
+    }
+
+    private fun iniciarObserver() {
+        loginViewModel.loginState.observe(this, Observer {
+            when(it) {
+                is RequestState.Success -> {
+                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                }
+                is RequestState.Error -> {
+                    tvFeedbackLogin.text = it.throwable.message
+                }
+                is RequestState.Loading -> {
+
+                }
+            }
+        })
+
+    }
+
+    private fun iniciarViewModel() {
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+    }
+
+    private fun startListeners() {
+        btEntrar.setOnClickListener{
+            loginViewModel.logar(Usuario(
+                etEmail.text.toString(),
+                    etSenha.text.toString()
+            ))
+        }
     }
 
     private fun hideKeyboard() {

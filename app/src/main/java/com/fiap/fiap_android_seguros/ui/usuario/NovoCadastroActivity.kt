@@ -1,14 +1,14 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.usuario
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
 
-class MensagensEnviadasActivity : AppCompatActivity() {
+class NovoCadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mensagens_enviadas)
+        setContentView(R.layout.activity_novo_cadastro)
     }
 
 

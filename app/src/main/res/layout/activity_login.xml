@@ -14,10 +14,10 @@
         tools:context=".activity.LoginActivity">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/etEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/field_style"
             android:drawableStart="@drawable/icone_login_usuario"
             android:drawablePadding="20dp"
@@ -25,12 +25,12 @@
             android:hint="E-MAIL"
             android:inputType="textPersonName"
             android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintEnd_toEndOf="@+id/tvFeedbackLogin"
+            app:layout_constraintStart_toStartOf="@+id/tvFeedbackLogin"
+            app:layout_constraintTop_toBottomOf="@+id/tvFeedbackLogin" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/etSenha"
             android:drawableStart="@drawable/icone_login_password"
             android:maxLines="1"
             android:drawablePadding="30dp"
@@ -41,9 +41,9 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintEnd_toEndOf="@+id/etEmail"
+            app:layout_constraintStart_toStartOf="@+id/etEmail"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
         <Button
             android:id="@+id/btEntrar"
@@ -54,9 +54,9 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_style"
             android:text="ENTRAR"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintEnd_toEndOf="@+id/etSenha"
+            app:layout_constraintStart_toStartOf="@+id/etSenha"
+            app:layout_constraintTop_toBottomOf="@+id/etSenha" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -81,6 +81,17 @@
             app:layout_constraintEnd_toEndOf="@+id/btEntrar"
             app:layout_constraintStart_toStartOf="@+id/btEntrar"
             app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
+
+        <TextView
+            android:id="@+id/tvFeedbackLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:textColor="@color/vermelho"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

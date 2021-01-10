@@ -9,20 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SobreActivity">
+        <activity android:name=".ui.sobre.SobreActivity">
 
         </activity>
-        <activity android:name=".activity.FalarCorretorActivity" >
+        <activity android:name=".ui.usuario.FalarCorretorActivity" >
 
 
         </activity>
-        <activity android:name=".activity.MensagensEnviadasActivity" >
+        <activity android:name=".ui.mensagens.MensagensEnviadasActivity" >
 
         </activity>
-        <activity android:name=".activity.UsuarioActivity" >
+        <activity android:name=".ui.usuario.UsuarioActivity" >
 
         </activity>
-        <activity android:name=".activity.NovoCadastroActivity" >
+        <activity android:name=".ui.usuario.NovoCadastroActivity" >
 
         </activity>
         <activity android:name=".activity.LoginActivity">

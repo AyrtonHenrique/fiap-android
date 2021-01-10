@@ -1,20 +1,20 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.usuario
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
 
-class SobreActivity : AppCompatActivity() {
+class FalarCorretorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sobre)
-
+        setContentView(R.layout.activity_falar_corretor)
     }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        hideSystemUI()
+        if (hasFocus) hideSystemUI()
     }
 
     private fun hideSystemUI() {
