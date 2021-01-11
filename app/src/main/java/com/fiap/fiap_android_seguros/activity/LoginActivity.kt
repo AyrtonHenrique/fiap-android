@@ -8,16 +8,37 @@ import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.models.RequestState
-import com.fiap.fiap_android_seguros.models.Usuario
-import com.fiap.fiap_android_seguros.ui.login.LoginViewModel
+import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
 import com.fiap.fiap_android_seguros.ui.usuario.NovoCadastroActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+//    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(
+            this,
+            LoginViewModelFactory(
+                LoginUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(LoginViewModel::class.java)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +48,13 @@ class LoginActivity : AppCompatActivity() {
         hideKeyboard()
 
         startListeners()
-        iniciarViewModel()
         iniciarObserver()
 
     }
 
     private fun iniciarObserver() {
         loginViewModel.loginState.observe(this, Observer {
-            when(it) {
+            when (it) {
                 is RequestState.Success -> {
                     startActivity((Intent(this, UsuarioActivity::class.java)))
                 }
@@ -44,27 +64,26 @@ class LoginActivity : AppCompatActivity() {
                 is RequestState.Loading -> {
 
                 }
+                com.fiap.fiap_android_seguros.data.remote.RequestState.Loading -> TODO()
+                is com.fiap.fiap_android_seguros.data.remote.RequestState.Success -> TODO()
+                is com.fiap.fiap_android_seguros.data.remote.RequestState.Error -> TODO()
             }
         })
 
-
     }
 
-    private fun iniciarViewModel() {
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-    }
 
     private fun startListeners() {
-        btEntrar.setOnClickListener{
-            loginViewModel.logar(Usuario(
+        btEntrar.setOnClickListener {
+            loginViewModel.doLogin(
                 etEmail.text.toString(),
-                    etSenha.text.toString()
-            ))
+                etSenha.text.toString()
+            )
         }
 
 
-        tvNovoCadastro.setOnClickListener{
+        tvNovoCadastro.setOnClickListener {
             startActivity((Intent(this, NovoCadastroActivity::class.java)))
         }
     }
