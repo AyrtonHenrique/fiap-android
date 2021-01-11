@@ -1,20 +1,32 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.sobre
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_sobre.*
+
 
 class SobreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sobre)
 
+        startListeners()
+    }
+
+    private fun startListeners() {
+        ivVoltar.setOnClickListener{
+            startActivity(Intent(this, UsuarioActivity::class.java))
+            finish()
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
+        hideSystemUI()
     }
 
     private fun hideSystemUI() {
@@ -28,7 +40,7 @@ class SobreActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                //or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Este item remove a barra superior
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 

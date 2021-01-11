@@ -1,14 +1,27 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.usuario
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.activity.LoginActivity
+import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 
-class UsuarioActivity : AppCompatActivity() {
+class NovoCadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_usuario)
+        setContentView(R.layout.activity_novo_cadastro)
+
+        startListeners()
+
+    }
+
+    private fun startListeners() {
+        ivBack.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
 
@@ -28,7 +41,7 @@ class UsuarioActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                //or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Este item remove a barra superior
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 

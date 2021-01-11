@@ -1,14 +1,27 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.mensagens
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
+import kotlinx.android.synthetic.main.activity_usuario.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mensagens_enviadas)
+        startListeners()
+    }
+
+    private fun startListeners() {
+
+        ivVoltar2.setOnClickListener {
+            startActivity(Intent(this, UsuarioActivity::class.java))
+        }
     }
 
 
@@ -28,7 +41,7 @@ class MensagensEnviadasActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                //or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Este item remove a barra superior
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
