@@ -11,14 +11,24 @@ object NewUserFirebasePayloadMapper {
         name = newUserFirebasePayload.name ?: "",
         email = newUserFirebasePayload.email ?: "",
         phone = newUserFirebasePayload.phone ?: "",
-        password = newUserFirebasePayload.password ?: ""
+        password = newUserFirebasePayload.password ?: "",
+        address = newUserFirebasePayload.address ?: "",
+        idade = newUserFirebasePayload.idade ?: "",
+        corretor = newUserFirebasePayload.corretor ?: false,
+        cliente = newUserFirebasePayload.cliente ?: false
+
+
     )
 
     fun mapToNewUserFirebasePayload(newUser: NewUserRemoteRequest) = NewUserFirebasePayload(
         name = newUser.name,
         email = newUser.email,
         phone = newUser.phone,
-        password = newUser.password
+        password = newUser.password,
+        address = newUser.address ?: "",
+        idade = newUser.idade ?: "",
+        corretor = newUser.corretor ?: false,
+        cliente = newUser.cliente ?: false
     )
 
     fun mapToUser(newUserFirebasePayload: NewUserFirebasePayload) = UserRemoteResponse(

@@ -4,16 +4,64 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.activity.LoginActivity
+import com.fiap.fiap_android_seguros.application.usecases.CreateUserUseCase
+import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
+import com.fiap.fiap_android_seguros.presentation.newUser.NewUserViewModel
+import com.fiap.fiap_android_seguros.presentation.newUser.NewUserViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 
 class NovoCadastroActivity : AppCompatActivity() {
+
+    private val newUserViewModel: NewUserViewModel by lazy {
+        ViewModelProvider(
+            this,
+            NewUserViewModelFactory(
+                CreateUserUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(NewUserViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_cadastro)
-
+        iniciarObserver()
         startListeners()
+
+    }
+
+    private fun iniciarObserver() {
+        newUserViewModel.registerState.observe(this, Observer {
+            when (it) {
+                is RequestState.Success -> {
+                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                }
+                is RequestState.Error -> {
+                    registerInfo.text = it.throwable.message
+                }
+                is RequestState.Loading -> {
+
+                }
+            }
+        })
 
     }
 
@@ -22,6 +70,19 @@ class NovoCadastroActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+        btCadastrar.setOnClickListener{
+            newUserViewModel.signOn(
+                nome = etNome.text.toString(),
+                address = etEndereco.text.toString(),
+                idade = etIdade.text.toString(),
+                cliente = swUsuario.isChecked,
+                corretor = swCorretor.isChecked,
+                email = etNomeUsuario.text.toString(),
+                password = etPassword.text.toString()
+            )
+        }
+
     }
 
 

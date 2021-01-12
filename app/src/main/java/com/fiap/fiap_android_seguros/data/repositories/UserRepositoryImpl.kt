@@ -38,7 +38,11 @@ class UserRepositoryImpl(
                 newUser.name,
                 newUser.email,
                 newUser.phone,
-                newUser.password
+                newUser.password,
+                newUser.address,
+                newUser.corretor,
+                newUser.cliente,
+                newUser.idade
             )
         )
     }
