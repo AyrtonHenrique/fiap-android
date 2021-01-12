@@ -76,8 +76,8 @@
             app:layout_constraintTop_toBottomOf="@+id/ivheader" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProdutos"
-        android:layout_width="0dp"
+        android:id="@+id/rvMensagens"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         app:layout_constraintLeft_toLeftOf="@id/ivheader"

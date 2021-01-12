@@ -4,17 +4,34 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.application.viewmodels.MensagensViewModel
 import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
 import kotlinx.android.synthetic.main.activity_usuario.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
+
+    private lateinit var mensagensViewModel: MensagensViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mensagens_enviadas)
         startListeners()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.rvMensagens)
+        val adapter = MensagemListaAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        mensagensViewModel = ViewModelProvider(this).get(MensagensViewModel::class.java)
+        mensagensViewModel.mensagens.observe(this, Observer { mensagens ->
+            mensagens?.let { adapter.setMensagens(it) }
+        })
     }
 
     private fun startListeners() {

@@ -7,4 +7,9 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
     </style>
+    <style name="borda_simples">
+        <item name="borderWidth">1px</item>
+        <item name="color">#333333</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
 </resources>
