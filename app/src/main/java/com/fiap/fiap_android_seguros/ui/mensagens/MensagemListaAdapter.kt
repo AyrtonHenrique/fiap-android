@@ -39,13 +39,20 @@ class MensagemListaAdapter
         val current = mensagens[position]
         val remetente = current.remetente
         val idMensagem: String = current.idMensagem
+        val mensagem: String = current.textoMensagem
+        val emailRemetente = current.emailRemetente
 
         holder.mensagemItemView.text = remetente
-        val botaoEditar: ImageView = holder.itemView.findViewById(R.id.ivReply)
+        val botaoResponder: ImageView = holder.itemView.findViewById(R.id.ivReply)
         val botaoApagar: ImageView = holder.itemView.findViewById(R.id.ivApagar)
 
-        botaoEditar.setOnClickListener{
-            val intent = Intent(contexto, FalarCorretorActivity::class.java)
+        botaoResponder.setOnClickListener{
+            val intent = Intent(contexto, FalarCorretorActivity::class.java).apply {
+                putExtra("MENSAGEM", mensagem)
+                putExtra("REMETENTE", remetente)
+                putExtra("ID_MENSAGEM", idMensagem)
+                putExtra("EMAIL_REMETENTE", emailRemetente)
+            }
             contexto.startActivity(intent)
         }
 
@@ -82,16 +89,12 @@ class MensagemListaAdapter
 
     private fun removeItemDaListaDeMensagens(idMensagem: String) {
         var lista: LinkedList<Mensagem> =  this.mensagens as LinkedList<Mensagem>
-        var i: Int = 0
-
-       lista.forEach {
-
+        lista.forEach {
             if(it.idMensagem.equals(idMensagem)) {
                 lista.remove(it)
                 notifyDataSetChanged()
                 return
             }
-            i++
         }
     }
 

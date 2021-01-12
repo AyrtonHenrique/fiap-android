@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import kotlinx.android.synthetic.main.activity_falar_corretor.*
 
 class FalarCorretorActivity : AppCompatActivity() {
@@ -12,6 +13,21 @@ class FalarCorretorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_falar_corretor)
         startListeners()
+        val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
+        if(mensagemParaResponder!=null && mensagemParaResponder.length> 0) {
+            val remetente: String? = intent.getStringExtra("REMETENTE")
+            tvRemetente.text = "Mensagem enviada de: " + remetente
+            tvMensagemEnviada.text = mensagemParaResponder.toString()
+            atualizaListenerBotaoBack()
+        } else {
+            tvMensagemEnviada.text = ""
+        }
+    }
+
+    private fun atualizaListenerBotaoBack() {
+        ivVoltar4.setOnClickListener {
+            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+        }
     }
 
     private fun startListeners() {
