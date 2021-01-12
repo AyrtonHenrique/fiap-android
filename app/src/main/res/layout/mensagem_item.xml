@@ -29,25 +29,25 @@
             tools:text="Nome Contato" />
 
         <ImageView
-            android:id="@+id/ivEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toEndOf="@+id/tvMensagem"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/edit_icon" />
-
-        <ImageView
             android:id="@+id/ivApagar"
             android:layout_width="32dp"
             android:layout_height="30dp"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivEditar"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toEndOf="@+id/ivReply"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/delete_icon" />
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.83"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/reply_icon"
+            tools:layout_editor_absoluteY="7dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
