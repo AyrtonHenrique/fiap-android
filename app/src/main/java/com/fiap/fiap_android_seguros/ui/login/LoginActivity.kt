@@ -1,4 +1,4 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,12 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.UserRemoteResponse
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
 import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
 import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
+import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.NovoCadastroActivity
-import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
@@ -56,7 +57,11 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginState.observe(this, Observer {
             when (it) {
                 is RequestState.Success -> {
-                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                    val user: UserRemoteResponse = it.data
+                    // Validar se é um corretor ou um usuario normal pra chavear
+//                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                    startActivity((Intent(this, CorretorActivity::class.java)))
+
                 }
                 is RequestState.Error -> {
                     tvFeedbackLogin.text = it.throwable.message

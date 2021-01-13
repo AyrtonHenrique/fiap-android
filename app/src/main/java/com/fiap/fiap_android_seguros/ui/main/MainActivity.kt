@@ -1,4 +1,4 @@
-package com.fiap.fiap_android_seguros.activity
+package com.fiap.fiap_android_seguros.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

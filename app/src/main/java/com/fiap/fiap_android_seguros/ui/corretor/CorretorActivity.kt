@@ -10,10 +10,9 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.activity.LoginActivity
+import com.fiap.fiap_android_seguros.ui.login.LoginActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
 import kotlinx.android.synthetic.main.activity_corretor.*
-import kotlinx.android.synthetic.main.activity_usuario.*
 
 class CorretorActivity : AppCompatActivity() {
 

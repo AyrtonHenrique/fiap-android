@@ -7,19 +7,15 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.activity.LoginActivity
+import com.fiap.fiap_android_seguros.ui.login.LoginActivity
 import com.fiap.fiap_android_seguros.application.usecases.CreateUserUseCase
-import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
-import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
-import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
 import com.fiap.fiap_android_seguros.presentation.newUser.NewUserViewModel
 import com.fiap.fiap_android_seguros.presentation.newUser.NewUserViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 
 class NovoCadastroActivity : AppCompatActivity() {

@@ -12,11 +12,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.activity.LoginActivity
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MensagemListaAdapter
     internal constructor(context: Context) : RecyclerView.Adapter<MensagemListaAdapter.MensagemViewHolder>() {

@@ -9,8 +9,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.activity.LoginActivity
-import com.fiap.fiap_android_seguros.activity.MainActivity
+import com.fiap.fiap_android_seguros.ui.login.LoginActivity
+import com.fiap.fiap_android_seguros.ui.main.MainActivity
 import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
 import kotlinx.android.synthetic.main.activity_usuario.*
