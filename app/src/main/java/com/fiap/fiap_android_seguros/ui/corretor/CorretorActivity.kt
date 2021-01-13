@@ -58,7 +58,17 @@ class CorretorActivity : AppCompatActivity() {
         }
 
         ivMeusClientes.setOnClickListener {
+            val intent = Intent(this, MeusClientesActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
+        }
 
+        tvMeusClientes.setOnClickListener {
+            val intent = Intent(this, MeusClientesActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
     }
