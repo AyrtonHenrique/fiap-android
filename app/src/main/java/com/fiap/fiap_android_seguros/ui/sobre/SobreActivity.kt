@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import kotlinx.android.synthetic.main.activity_novo_cadastro.*
 import kotlinx.android.synthetic.main.activity_sobre.*
 
 
@@ -13,8 +15,18 @@ class SobreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sobre)
-        ivCabecalho.setImageResource(R.drawable.corretor_header_simples)
         startListeners()
+
+        // Valida se o login é de um corretor e adapta o front
+        val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
+        if(origemCorretor.equals("TRUE")) {
+            ivCabecalho.setImageResource(R.drawable.corretor_header_simples)
+            ivVoltar.setOnClickListener{
+                startActivity(Intent(this, CorretorActivity::class.java))
+                finish()
+            }
+        }
+
     }
 
     private fun startListeners() {
