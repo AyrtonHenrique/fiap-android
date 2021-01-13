@@ -1,4 +1,4 @@
-package com.fiap.fiap_android_seguros.ui.usuario
+package com.fiap.fiap_android_seguros.ui.corretor
 
 import android.app.AlertDialog
 import android.content.Context
@@ -7,50 +7,56 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.activity.LoginActivity
-import com.fiap.fiap_android_seguros.activity.MainActivity
-import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
+import kotlinx.android.synthetic.main.activity_corretor.*
 import kotlinx.android.synthetic.main.activity_usuario.*
 
-class UsuarioActivity : AppCompatActivity() {
+class CorretorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_usuario)
+        setContentView(R.layout.activity_corretor)
         startListeners()
     }
 
     private fun startListeners() {
-        btSair.setOnClickListener{
+        btSairCorretor.setOnClickListener {
             showDialog()
         }
-        btSobre.setOnClickListener{
-            startActivity(Intent(this, SobreActivity::class.java))
+
+        btSobreCorretor.setOnClickListener {
+            val intent = Intent(this, SobreActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
-        ivFalarCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
-        }
-        tvFalarComUmCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
+        ivGerenciarMensagensCorretor.setOnClickListener {
+
         }
 
-        ivPesquisarPlanos.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-        tvPesquisarPlano.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        tvGerenciarMensagensCorretor.setOnClickListener{
+
         }
 
-        ivGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+        ivPesquisarClientes.setOnClickListener{
+
         }
-        tvGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+
+        tvPesquisarClientes.setOnClickListener {
+
         }
+
+        ivMeusClientes.setOnClickListener {
+
+        }
+
+
+
     }
 
     fun Context.toast(message: String) {
@@ -77,6 +83,12 @@ class UsuarioActivity : AppCompatActivity() {
         dialog = builder.create()
         dialog.show()
     }
+
+
+    private fun hideKeyboard() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+    }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

@@ -11,12 +11,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.usuario.UsuarioActivity">
+        tools:context=".ui.corretor.CorretorActivity">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="173dp"
-            android:background="@color/verde_agua_2"
+            android:background="@color/azul_agua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -27,13 +27,11 @@
             android:id="@+id/imageView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/tela_usuario_header" />
+            app:srcCompat="@drawable/corretor_header" />
 
         <ImageView
             android:id="@+id/ivMeusDados"
@@ -44,10 +42,10 @@
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/corretor_icon" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tvNomeCorretor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
@@ -55,7 +53,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
+            app:layout_constraintHorizontal_bias="0.69"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,17 +63,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="64 anos"
-            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/tvNomeCorretor"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintStart_toStartOf="@+id/tvNomeCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/tvNomeCorretor" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Plano Atual:"
+            android:text="Status:"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/ivMeusDados"
@@ -88,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Validade:"
+            android:text="Número de Clientes:"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -97,91 +95,91 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <ImageView
-            android:id="@+id/ivFalarCorretor"
+            android:id="@+id/ivMeusClientes"
             android:layout_width="95dp"
             android:layout_height="96dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvFalarComUmCorretor"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:srcCompat="@drawable/corretor_icon" />
+            app:srcCompat="@drawable/buscar_clientes" />
 
         <TextView
-            android:id="@+id/tvFalarComUmCorretor"
+            android:id="@+id/tvMeusClientes"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
-            android:text="Falar com um Corretor"
+            android:layout_marginTop="48dp"
+            android:text="Meus Clientes"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivFalarCorretor"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <ImageView
-            android:id="@+id/ivPesquisarPlanos"
+            android:id="@+id/ivPesquisarClientes"
             android:layout_width="0dp"
             android:layout_height="92dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/ivFalarCorretor"
-            app:layout_constraintStart_toStartOf="@+id/ivFalarCorretor"
-            app:layout_constraintTop_toBottomOf="@+id/ivFalarCorretor"
+            app:layout_constraintEnd_toEndOf="@+id/ivMeusClientes"
+            app:layout_constraintStart_toStartOf="@+id/ivMeusClientes"
+            app:layout_constraintTop_toBottomOf="@+id/ivMeusClientes"
             app:srcCompat="@drawable/search_icon" />
 
         <TextView
-            android:id="@+id/tvPesquisarPlano"
+            android:id="@+id/tvPesquisarClientes"
             android:layout_width="208dp"
             android:layout_height="59dp"
-            android:layout_marginTop="60dp"
-            android:text="Pesquisar Planos de Saúde"
+            android:layout_marginTop="40dp"
+            android:text="Pesquisar Clientes"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tvFalarComUmCorretor"
+            app:layout_constraintEnd_toEndOf="@+id/tvMeusClientes"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvFalarComUmCorretor"
-            app:layout_constraintTop_toBottomOf="@+id/tvFalarComUmCorretor" />
+            app:layout_constraintStart_toStartOf="@+id/tvMeusClientes"
+            app:layout_constraintTop_toBottomOf="@+id/tvMeusClientes" />
 
         <ImageView
-            android:id="@+id/ivGerenciarMensagens"
+            android:id="@+id/ivGerenciarMensagensCorretor"
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/ivPesquisarPlanos"
-            app:layout_constraintStart_toStartOf="@+id/ivPesquisarPlanos"
-            app:layout_constraintTop_toBottomOf="@+id/ivPesquisarPlanos"
+            app:layout_constraintEnd_toEndOf="@+id/ivPesquisarClientes"
+            app:layout_constraintStart_toStartOf="@+id/ivPesquisarClientes"
+            app:layout_constraintTop_toBottomOf="@+id/ivPesquisarClientes"
             app:srcCompat="@drawable/mensagens_icon" />
 
         <TextView
-            android:id="@+id/tvGerenciarMensagens"
-            android:layout_width="269dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="40dp"
-            android:text="Gerenciar Mensagens Enviadas"
+            android:id="@+id/tvGerenciarMensagensCorretor"
+            android:layout_width="209dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="32dp"
+            android:text="Verificar Novas Mensagens"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tvPesquisarPlano"
-            app:layout_constraintHorizontal_bias="0.07"
-            app:layout_constraintStart_toStartOf="@+id/tvPesquisarPlano"
-            app:layout_constraintTop_toBottomOf="@+id/tvPesquisarPlano" />
+            app:layout_constraintEnd_toEndOf="@+id/tvPesquisarClientes"
+            app:layout_constraintHorizontal_bias="0.414"
+            app:layout_constraintStart_toStartOf="@+id/tvPesquisarClientes"
+            app:layout_constraintTop_toBottomOf="@+id/tvPesquisarClientes" />
 
         <Button
-            android:id="@+id/btSobre"
+            android:id="@+id/btSobreCorretor"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_style"
             android:text="Sobre"
-            app:layout_constraintEnd_toStartOf="@+id/btSair"
+            app:layout_constraintEnd_toStartOf="@+id/btSairCorretor"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
+            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagensCorretor" />
 
         <Button
-            android:id="@+id/btSair"
+            android:id="@+id/btSairCorretor"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -189,17 +187,17 @@
             android:text="Sair"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btSobre"
-            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagens" />
+            app:layout_constraintStart_toEndOf="@+id/btSobreCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/ivGerenciarMensagensCorretor" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/btSobre"
+            app:layout_constraintEnd_toEndOf="@+id/btSobreCorretor"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/btSobre"
-            app:layout_constraintTop_toBottomOf="@+id/btSobre">
+            app:layout_constraintStart_toStartOf="@+id/btSobreCorretor"
+            app:layout_constraintTop_toBottomOf="@+id/btSobreCorretor">
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
