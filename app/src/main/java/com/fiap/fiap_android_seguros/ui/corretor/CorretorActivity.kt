@@ -50,11 +50,17 @@ class CorretorActivity : AppCompatActivity() {
         }
 
         ivPesquisarClientes.setOnClickListener{
-
+            val intent = Intent(this, PesquisarClientesActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
         tvPesquisarClientes.setOnClickListener {
-
+            val intent = Intent(this, PesquisarClientesActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
         ivMeusClientes.setOnClickListener {

@@ -135,7 +135,7 @@
             android:layout_width="208dp"
             android:layout_height="59dp"
             android:layout_marginTop="40dp"
-            android:text="Pesquisar Clientes"
+            android:text="Pesquisar Novos Clientes"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tvMeusClientes"
