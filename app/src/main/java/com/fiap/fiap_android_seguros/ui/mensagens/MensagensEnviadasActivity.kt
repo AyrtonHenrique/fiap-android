@@ -10,28 +10,44 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.application.viewmodels.MensagensViewModel
-import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
+import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
-import kotlinx.android.synthetic.main.activity_usuario.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
 
     private lateinit var mensagensViewModel: MensagensViewModel
+    private var origemCorretor: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR").equals("TRUE")
         setContentView(R.layout.activity_mensagens_enviadas)
         startListeners()
+        validaCorretor()
+        carregaRecyclerView()
+    }
 
+    private fun carregaRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.rvMensagens)
-        val adapter = MensagemListaAdapter(this)
+        val adapter = MensagemListaAdapter(this, origemCorretor)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         mensagensViewModel = ViewModelProvider(this).get(MensagensViewModel::class.java)
         mensagensViewModel.mensagens.observe(this, Observer { mensagens ->
             mensagens?.let { adapter.setMensagens(it) }
         })
+    }
+
+    private fun validaCorretor() {
+        // Valida se o login é de um corretor e adapta o front
+        if(origemCorretor) {
+            ivheader.setImageResource(R.drawable.listagem_corretor_header)
+            ivVoltar2.setOnClickListener{
+                startActivity(Intent(this, CorretorActivity::class.java))
+                finish()
+            }
+        }
     }
 
     private fun startListeners() {

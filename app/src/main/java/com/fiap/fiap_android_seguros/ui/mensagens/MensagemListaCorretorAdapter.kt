@@ -13,15 +13,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
+import com.fiap.fiap_android_seguros.ui.corretor.FalarClienteActivity
 import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
 import java.util.*
 
-class MensagemListaAdapter
-    internal constructor(context: Context, origem: Boolean) : RecyclerView.Adapter<MensagemListaAdapter.MensagemViewHolder>() {
+class MensagemListaCorretorAdapter
+    internal constructor(context: Context) : RecyclerView.Adapter<MensagemListaCorretorAdapter.MensagemViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var mensagens = emptyList<Mensagem>()
     private val contexto = context;
-    private val origemCorretor = origem
 
     inner class MensagemViewHolder(itemView: View)  :
         RecyclerView.ViewHolder(itemView) {
@@ -46,13 +46,11 @@ class MensagemListaAdapter
         val botaoApagar: ImageView = holder.itemView.findViewById(R.id.ivApagar)
 
         botaoResponder.setOnClickListener{
-            val intent = Intent(contexto, FalarCorretorActivity::class.java).apply {
+            val intent = Intent(contexto, FalarClienteActivity::class.java).apply {
                 putExtra("MENSAGEM", mensagem)
                 putExtra("REMETENTE", remetente)
                 putExtra("ID_MENSAGEM", idMensagem)
                 putExtra("EMAIL_REMETENTE", emailRemetente)
-                if(origemCorretor)
-                    putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             contexto.startActivity(intent)
         }

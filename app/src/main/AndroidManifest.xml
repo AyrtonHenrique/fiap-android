@@ -12,12 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.corretor.CorretorActivity"></activity>
-        <activity android:name=".ui.sobre.SobreActivity"></activity>
-        <activity android:name=".ui.usuario.FalarCorretorActivity"></activity>
-        <activity android:name=".ui.mensagens.MensagensEnviadasActivity"></activity>
-        <activity android:name=".ui.usuario.UsuarioActivity"></activity>
-        <activity android:name=".ui.usuario.NovoCadastroActivity"></activity>
+        <activity android:name=".ui.corretor.FalarClienteActivity"></activity>
+        <activity android:name=".ui.corretor.CorretorActivity" />
+        <activity android:name=".ui.sobre.SobreActivity" />
+        <activity android:name=".ui.usuario.FalarCorretorActivity" />
+        <activity android:name=".ui.mensagens.MensagensEnviadasActivity" />
+        <activity android:name=".ui.usuario.UsuarioActivity" />
+        <activity android:name=".ui.usuario.NovoCadastroActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity"></activity>
+        <activity android:name=".ui.main.MainActivity" />
     </application>
 
 </manifest>

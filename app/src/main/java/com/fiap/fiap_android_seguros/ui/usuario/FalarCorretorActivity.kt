@@ -13,6 +13,30 @@ class FalarCorretorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_falar_corretor)
         startListeners()
+        recuperaDadosMensagens()
+        validaCorretor()
+
+
+    }
+
+    private fun validaCorretor() {
+        // Valida se o login é de um corretor e adapta o front
+        val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
+        if(origemCorretor.equals("TRUE")) {
+            ivHeaderEnviarMensagens.setImageResource(R.drawable.listagem_corretor_header)
+            tvFalarCom.text = "Falar com o Cliente"
+            ivVoltar4.setOnClickListener{
+                val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
+                    putExtra("ORIGEM_CORRETOR", "TRUE")
+                }
+                startActivity(intent)
+                finish()
+            }
+        }
+
+    }
+
+    private fun recuperaDadosMensagens() {
         val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
         if(mensagemParaResponder!=null && mensagemParaResponder.length> 0) {
             val remetente: String? = intent.getStringExtra("REMETENTE")

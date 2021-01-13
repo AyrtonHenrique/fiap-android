@@ -16,7 +16,10 @@ class SobreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sobre)
         startListeners()
+        validaCorretor()
+    }
 
+    private fun validaCorretor() {
         // Valida se o login é de um corretor e adapta o front
         val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
         if(origemCorretor.equals("TRUE")) {
@@ -28,6 +31,7 @@ class SobreActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun startListeners() {
         ivVoltar.setOnClickListener{

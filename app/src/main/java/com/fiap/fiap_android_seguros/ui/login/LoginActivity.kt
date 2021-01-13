@@ -17,6 +17,7 @@ import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
 import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
 import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.NovoCadastroActivity
+import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
@@ -59,8 +60,8 @@ class LoginActivity : AppCompatActivity() {
                 is RequestState.Success -> {
                     val user: UserRemoteResponse = it.data
                     // Validar se é um corretor ou um usuario normal pra chavear
-//                    startActivity((Intent(this, UsuarioActivity::class.java)))
-                    startActivity((Intent(this, CorretorActivity::class.java)))
+                    startActivity((Intent(this, UsuarioActivity::class.java)))
+//                    startActivity((Intent(this, CorretorActivity::class.java)))
 
                 }
                 is RequestState.Error -> {

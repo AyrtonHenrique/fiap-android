@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
+import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
 import kotlinx.android.synthetic.main.activity_corretor.*
 
@@ -35,11 +36,17 @@ class CorretorActivity : AppCompatActivity() {
         }
 
         ivGerenciarMensagensCorretor.setOnClickListener {
-
+            val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
         tvGerenciarMensagensCorretor.setOnClickListener{
-
+            val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
+                putExtra("ORIGEM_CORRETOR", "TRUE")
+            }
+            startActivity(intent)
         }
 
         ivPesquisarClientes.setOnClickListener{
@@ -53,8 +60,6 @@ class CorretorActivity : AppCompatActivity() {
         ivMeusClientes.setOnClickListener {
 
         }
-
-
 
     }
 
