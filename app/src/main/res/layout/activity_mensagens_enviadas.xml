@@ -13,10 +13,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.mensagens.MensagensEnviadasActivity">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutMensagensEnviadas"
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:background="@color/verde_agua_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <ImageView
         android:id="@+id/ivheader"
         android:layout_width="0dp"
-        android:layout_height="198dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +45,7 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="105dp"
         android:text="Maria Isabel Silva"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,14 +63,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 
-
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="95dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/user_icon" />

@@ -1,6 +1,7 @@
 package com.fiap.fiap_android_seguros.ui.sobre
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -24,6 +25,7 @@ class SobreActivity : AppCompatActivity() {
         val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
         if(origemCorretor.equals("TRUE")) {
             ivCabecalho.setImageResource(R.drawable.corretor_header_simples)
+            linearLayout.setBackgroundColor( Color.rgb(97, 198, 254))
             ivVoltar.setOnClickListener{
                 startActivity(Intent(this, CorretorActivity::class.java))
                 finish()

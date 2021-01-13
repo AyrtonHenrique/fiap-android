@@ -1,6 +1,7 @@
 package com.fiap.fiap_android_seguros.ui.mensagens
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.fiap.fiap_android_seguros.application.viewmodels.MensagensViewModel
 import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
+import kotlinx.android.synthetic.main.activity_sobre.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
 
@@ -43,6 +45,7 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         // Valida se o login é de um corretor e adapta o front
         if(origemCorretor) {
             ivheader.setImageResource(R.drawable.listagem_corretor_header)
+            linearLayoutMensagensEnviadas.setBackgroundColor( Color.rgb(97, 198, 254))
             ivVoltar2.setOnClickListener{
                 startActivity(Intent(this, CorretorActivity::class.java))
                 finish()
