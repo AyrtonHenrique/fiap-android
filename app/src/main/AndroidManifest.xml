@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fiap.fiap_android_seguros">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -11,22 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.sobre.SobreActivity">
-
-        </activity>
-        <activity android:name=".ui.usuario.FalarCorretorActivity" >
-
-
-        </activity>
-        <activity android:name=".ui.mensagens.MensagensEnviadasActivity" >
-
-        </activity>
-        <activity android:name=".ui.usuario.UsuarioActivity" >
-
-        </activity>
-        <activity android:name=".ui.usuario.NovoCadastroActivity" >
-
-        </activity>
+        <activity android:name=".ui.corretor.CorretorActivity"></activity>
+        <activity android:name=".ui.sobre.SobreActivity"></activity>
+        <activity android:name=".ui.usuario.FalarCorretorActivity"></activity>
+        <activity android:name=".ui.mensagens.MensagensEnviadasActivity"></activity>
+        <activity android:name=".ui.usuario.UsuarioActivity"></activity>
+        <activity android:name=".ui.usuario.NovoCadastroActivity"></activity>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" >
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
     </application>
 
 </manifest>
