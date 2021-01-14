@@ -57,6 +57,7 @@ class MensagensEnviadasActivity : AppCompatActivity() {
 
         ivVoltar2.setOnClickListener {
             startActivity(Intent(this, UsuarioActivity::class.java))
+            finish()
         }
     }
 

@@ -60,9 +60,9 @@ class LoginActivity : AppCompatActivity() {
                 is RequestState.Success -> {
                     val user: UserRemoteResponse = it.data
                     // Validar se é um corretor ou um usuario normal pra chavear
-                    startActivity((Intent(this, UsuarioActivity::class.java)))
- //                   startActivity((Intent(this, CorretorActivity::class.java)))
-
+ //                   startActivity((Intent(this, UsuarioActivity::class.java)))
+                    startActivity((Intent(this, CorretorActivity::class.java)))
+                    finish()
                 }
                 is RequestState.Error -> {
                     tvFeedbackLogin.text = it.throwable.message

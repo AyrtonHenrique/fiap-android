@@ -44,6 +44,7 @@ class MeusClientesActivity : AppCompatActivity() {
     private fun startListeners() {
         ivVoltarMeusClientes.setOnClickListener {
             startActivity(Intent(this, CorretorActivity::class.java))
+            finish()
         }
     }
 

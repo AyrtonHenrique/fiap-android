@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.usuario.PesquisarPlanosActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:background="@color/verde_agua_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageView
+        android:id="@+id/ivVoltarPesquisarPlanos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHeaderPesquisarPlanos"
+        app:srcCompat="@drawable/back_icon" />
+
+    <ImageView
+        android:id="@+id/ivHeaderPesquisarPlanos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/listagem_usuario_header" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_icon" />
+
+    <TextView
+        android:id="@+id/tvNomeUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:text="Maria Isabel Silva"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivHeaderPesquisarPlanos" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="63 anos"
+        app:layout_constraintEnd_toEndOf="@+id/tvNomeUsuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvNomeUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeUsuario" />
+
+    <TextView
+        android:id="@+id/tvEscolhaPlanoDeSaude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Escolha o Plano de Saúde"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.61"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHeaderPesquisarPlanos" />
+
+    <ImageView
+        android:id="@+id/ivAmil"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEscolhaPlanoDeSaude"
+        app:srcCompat="@drawable/amil_logo" />
+
+    <ImageView
+        android:id="@+id/ivBradesco"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivAmil"
+        app:layout_constraintStart_toStartOf="@+id/ivAmil"
+        app:layout_constraintTop_toBottomOf="@+id/ivAmil"
+        app:srcCompat="@drawable/bradesco_logo" />
+
+    <ImageView
+        android:id="@+id/ivUnimed"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivBradesco"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="@+id/ivBradesco"
+        app:layout_constraintTop_toBottomOf="@+id/ivBradesco"
+        app:srcCompat="@drawable/unimed_logo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

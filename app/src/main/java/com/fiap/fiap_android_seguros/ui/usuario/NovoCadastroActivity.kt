@@ -49,6 +49,7 @@ class NovoCadastroActivity : AppCompatActivity() {
             when (it) {
                 is RequestState.Success -> {
                     startActivity((Intent(this, UsuarioActivity::class.java)))
+                    finish()
                 }
                 is RequestState.Error -> {
                     registerInfo.text = it.throwable.message

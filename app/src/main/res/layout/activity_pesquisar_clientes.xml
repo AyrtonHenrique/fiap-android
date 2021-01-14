@@ -81,19 +81,25 @@
             android:text="Buscar Novos Clientes"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivheaderPesquisarClientes" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPesquisarClientes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            app:layout_constraintLeft_toLeftOf="@id/ivheaderPesquisarClientes"
-            app:layout_constraintRight_toRightOf="@id/ivheaderPesquisarClientes"
-            app:layout_constraintTop_toBottomOf="@+id/ivheaderPesquisarClientes"
-            tools:listitem="@layout/clientes_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPesquisarClientes"
+                android:layout_width="0dp"
+                android:scrollbars="vertical"
+                android:scrollbarSize="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                app:layout_constraintLeft_toLeftOf="@id/ivheaderPesquisarClientes"
+                app:layout_constraintRight_toRightOf="@id/ivheaderPesquisarClientes"
+                app:layout_constraintTop_toBottomOf="@+id/ivheaderPesquisarClientes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/clientes_item" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

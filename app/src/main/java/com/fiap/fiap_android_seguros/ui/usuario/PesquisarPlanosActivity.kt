@@ -6,78 +6,63 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
-import com.fiap.fiap_android_seguros.ui.main.MainActivity
-import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
-import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
-import kotlinx.android.synthetic.main.activity_usuario.*
+import kotlinx.android.synthetic.main.activity_pesquisar_planos.*
 
-class UsuarioActivity : AppCompatActivity() {
-
+class PesquisarPlanosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_usuario)
+        setContentView(R.layout.activity_pesquisar_planos)
         startListeners()
     }
 
     private fun startListeners() {
-        btSair.setOnClickListener{
-            showDialog()
-        }
-        btSobre.setOnClickListener{
-            startActivity(Intent(this, SobreActivity::class.java))
+        ivVoltarPesquisarPlanos.setOnClickListener {
+            startActivity(Intent(this, UsuarioActivity::class.java))
             finish()
         }
 
-        ivFalarCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
-            finish()
+        ivAmil.setOnClickListener {
+            showDialog("Amil")
         }
-        tvFalarComUmCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
-            finish()
+        ivUnimed.setOnClickListener {
+            showDialog("Unimed")
         }
-
-        ivPesquisarPlanos.setOnClickListener {
-            startActivity(Intent(this, PesquisarPlanosActivity::class.java))
-            finish()
-        }
-        tvPesquisarPlano.setOnClickListener {
-            startActivity(Intent(this, PesquisarPlanosActivity::class.java))
-            finish()
-        }
-
-        ivGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
-            finish()
-        }
-        tvGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
-            finish()
+        ivBradesco.setOnClickListener {
+            showDialog("Bradesco Saúde")
         }
     }
+
 
     fun Context.toast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDialog() {
+
+    private fun showDialog(plano: String) {
         lateinit var dialog: AlertDialog
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Fechar Aplicativo")
-        builder.setMessage("Tem certeza que gostaria de fechar a sua sessão?")
+        builder.setTitle("Escolher Plano")
+        builder.setMessage("Tem certeza que gostaria de escolher o plano " + plano
+                + "? \nO mesmo terá validade até o último dia deste ano.")
 
         val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
+                    toast("Plano da " + plano + " escolhido.")
+                    Handler().postDelayed({
+                        startActivity(Intent(this, UsuarioActivity::class.java))
+                        // Finaliza a Activity Atual
+                        finish()
+                    }, 3000)
                 }
             }
         }
+
         builder.setPositiveButton("Sim", dialogClickListener)
         builder.setNeutralButton("Cancelar", dialogClickListener)
 

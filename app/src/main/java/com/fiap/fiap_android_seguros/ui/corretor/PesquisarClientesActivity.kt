@@ -30,6 +30,7 @@ class PesquisarClientesActivity : AppCompatActivity() {
     private fun startListeners() {
         ivVoltarPesquisarClientes.setOnClickListener {
             startActivity(Intent(this, CorretorActivity::class.java))
+            finish()
         }
     }
 
@@ -38,6 +39,8 @@ class PesquisarClientesActivity : AppCompatActivity() {
         val adapter = ClientesListaAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+
         clientesViewModel = ViewModelProvider(this).get(ClientesViewModel::class.java)
         clientesViewModel.todosClientes.observe(this, Observer { clientes ->
             clientes?.let { adapter.setClientes(it) }

@@ -33,6 +33,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         ivGerenciarMensagensCorretor.setOnClickListener {
@@ -40,6 +41,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         tvGerenciarMensagensCorretor.setOnClickListener{
@@ -47,6 +49,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         ivPesquisarClientes.setOnClickListener{
@@ -54,6 +57,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         tvPesquisarClientes.setOnClickListener {
@@ -61,6 +65,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         ivMeusClientes.setOnClickListener {
@@ -68,6 +73,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
         tvMeusClientes.setOnClickListener {
@@ -75,6 +81,7 @@ class CorretorActivity : AppCompatActivity() {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
             startActivity(intent)
+            finish()
         }
 
     }

@@ -16,7 +16,6 @@ class FalarCorretorActivity : AppCompatActivity() {
         recuperaDadosMensagens()
         validaCorretor()
 
-
     }
 
     private fun validaCorretor() {
@@ -51,12 +50,14 @@ class FalarCorretorActivity : AppCompatActivity() {
     private fun atualizaListenerBotaoBack() {
         ivVoltar4.setOnClickListener {
             startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+            finish()
         }
     }
 
     private fun startListeners() {
         ivVoltar4.setOnClickListener {
             startActivity(Intent(this, UsuarioActivity::class.java))
+            finish()
         }
     }
 
