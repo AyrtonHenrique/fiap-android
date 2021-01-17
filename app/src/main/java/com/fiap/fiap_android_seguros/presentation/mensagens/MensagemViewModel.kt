@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fiap.fiap_android_seguros.application.usecases.MessageUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
-import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import kotlinx.coroutines.launch
 
 class MensagemViewModel (
@@ -17,7 +16,7 @@ class MensagemViewModel (
 
     fun send(msg: String, idConversa: String) {
         viewModelScope.launch {
-            messageState.value = messageUseCase.SendCorretorMessage(msg, idConversa)
+            messageState.value = messageUseCase.SendMessage(msg, idConversa)
         }
     }
 

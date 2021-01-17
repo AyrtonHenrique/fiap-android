@@ -23,4 +23,6 @@ interface UserRemoteDataSource {
 
     suspend fun getUserById(id:String) : RequestState<User>
 
+    suspend fun removeConversation (id:String): RequestState<String?>
+
 }

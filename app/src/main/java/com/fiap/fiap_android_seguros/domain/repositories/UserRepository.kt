@@ -21,4 +21,6 @@ interface UserRepository {
     suspend fun getAllConversations() : RequestState<List<Conversa>>
 
     suspend fun getUserById(id: String) : RequestState<User>
+
+    suspend fun removeConversation(id : String) : RequestState<String?>
 }

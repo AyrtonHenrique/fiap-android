@@ -129,13 +129,6 @@ class FalarCorretorActivity : AppCompatActivity() {
             )
     }
 
-    private fun atualizaListenerBotaoBack() {
-        ivVoltar4.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
-            finish()
-        }
-    }
-
     private fun startListeners() {
         ivVoltar4.setOnClickListener {
             startActivity(Intent(this, UsuarioActivity::class.java))
@@ -147,6 +140,7 @@ class FalarCorretorActivity : AppCompatActivity() {
                 intent.getStringExtra("ID_CONVERSA") ?: ""
             )
         }
+
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

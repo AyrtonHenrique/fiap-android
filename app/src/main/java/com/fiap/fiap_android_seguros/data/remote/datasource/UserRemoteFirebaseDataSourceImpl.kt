@@ -207,4 +207,19 @@ class UserRemoteFirebaseDataSourceImpl(
             RequestState.Error(e)
         }
     }
+
+    override suspend fun removeConversation(id: String): RequestState<String?> {
+        return try {
+            val deletar = firebaseFirestore
+                .collection("conversations")
+                .document(id)
+                .delete()
+                .await()
+
+            RequestState.Success(id)
+
+        } catch (e: Exception) {
+            RequestState.Error(e)
+        }
+    }
 }

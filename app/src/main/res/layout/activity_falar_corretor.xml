@@ -96,17 +96,19 @@
         app:layout_constraintTop_toBottomOf="@+id/tvFalarCom" />
 
 
-        <TextView
-            android:id="@+id/tvMensagemEnviada"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Mensagem Enviada"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRemetente"/>
+    <TextView
+        android:id="@+id/tvMensagemEnviada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="vertical"
+        android:maxLines="5"
+        android:text="Mensagem Enviada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRemetente" />
 
     <EditText
         android:id="@+id/tvMensagemParaEnviar"

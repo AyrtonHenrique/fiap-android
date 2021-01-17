@@ -10,27 +10,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.application.usecases.GetUserByIdUseCase
 import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
 import com.fiap.fiap_android_seguros.application.usecases.MessageUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModel
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
 import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModelFactory
-import com.fiap.fiap_android_seguros.presentation.user.UsuarioViewModel
-import com.fiap.fiap_android_seguros.presentation.user.UsuarioViewModelFactory
 import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
-import kotlinx.coroutines.runBlocking
 
 class MensagensEnviadasActivity : AppCompatActivity() {
 
-//   private lateinit var mensagensViewModel: ConversasViewModel
 
-    private val mensagensViewModel: ConversasViewModel by lazy {
+    private val conversasViewModel: ConversasViewModel by lazy {
         ViewModelProvider(
             this,
             ConversasViewModelFactory(
@@ -53,21 +49,21 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         ).get(ConversasViewModel::class.java)
     }
 
-    private val usuarioViewModel: UsuarioViewModel by lazy {
-        ViewModelProvider(
-            this,
-            UsuarioViewModelFactory(
-                GetUserByIdUseCase(
-                    UserRepositoryImpl(
-                        (UserRemoteFirebaseDataSourceImpl(
-                            FirebaseAuth.getInstance(),
-                            FirebaseFirestore.getInstance()
-                        ))
-                    )
-                )
-            )
-        ).get(UsuarioViewModel::class.java)
-    }
+//    private val usuarioViewModel: UsuarioViewModel by lazy {
+//        ViewModelProvider(
+//            this,
+//            UsuarioViewModelFactory(
+//                GetUserByIdUseCase(
+//                    UserRepositoryImpl(
+//                        (UserRemoteFirebaseDataSourceImpl(
+//                            FirebaseAuth.getInstance(),
+//                            FirebaseFirestore.getInstance()
+//                        ))
+//                    )
+//                )
+//            )
+//        ).get(UsuarioViewModel::class.java)
+//    }
 
 
     private var origemCorretor: Boolean = false
@@ -83,40 +79,27 @@ class MensagensEnviadasActivity : AppCompatActivity() {
 
     private fun carregaRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.rvMensagens)
-        val adapter = MensagemListaAdapter(this, origemCorretor)
+        val adapter = MensagemListaAdapter(this, origemCorretor, conversasViewModel)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-//        mensagensViewModel = ViewModelProvider(this).get(MensagensViewModel::class.java)
-//        mensagensViewModel = ViewModelProvider(
-//            this,
-//            ConversasViewModelFactory(
-//                MessageUseCase(
-//                    UserRepositoryImpl(
-//                        (UserRemoteFirebaseDataSourceImpl(
-//                            FirebaseAuth.getInstance(),
-//                            FirebaseFirestore.getInstance()
-//                        ))
-//                    ), GetUserLoggedUseCase(
-//                        UserRepositoryImpl(
-//                            (UserRemoteFirebaseDataSourceImpl(
-//                                FirebaseAuth.getInstance(),
-//                                FirebaseFirestore.getInstance()
-//                            ))
-//                        )
-//                    )
-//                )
-//            )
-//        ).get(ConversasViewModel::class.java)
 
-        mensagensViewModel.buscaConversas()
+        conversasViewModel.buscaConversas()
 
-        mensagensViewModel.mensagens.observe(this, Observer { conversas ->
+        conversasViewModel.mensagens.observe(this, Observer { conversas ->
             conversas?.let {
-                adapter.setMensagens(it)
+                adapter.setConversas(it)
             }
         })
 
-
+        conversasViewModel.removeState.observe(this, Observer {
+            when (it) {
+                is RequestState.Success -> {
+                    adapter.removeItemDaListaDeMensagens(it.data ?: "")
+                }
+                RequestState.Loading -> TODO()
+                is RequestState.Error -> TODO()
+            }
+        })
     }
 
     private fun validaCorretor() {

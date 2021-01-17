@@ -15,6 +15,7 @@ class ConversasViewModel(private val messageUseCase: MessageUseCase) :
     ViewModel() {
 
     val mensagens = MutableLiveData<List<Conversa>>()
+    val removeState = MutableLiveData<RequestState<String?>>()
 
     fun buscaConversas() {
         viewModelScope.launch {
@@ -22,15 +23,18 @@ class ConversasViewModel(private val messageUseCase: MessageUseCase) :
 
             when (conversas) {
                 is RequestState.Success -> {
-
                     mensagens.value = conversas.data
-
                 }
                 RequestState.Loading -> TODO()
                 is RequestState.Error -> TODO()
             }
         }
+    }
 
+    fun remover(id: String) {
+        viewModelScope.launch {
+            removeState.value = messageUseCase.RemoveConversation(id)
+        }
     }
 
 }

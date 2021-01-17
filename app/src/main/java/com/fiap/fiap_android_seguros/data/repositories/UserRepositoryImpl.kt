@@ -54,6 +54,10 @@ class UserRepositoryImpl(
         return userRemoteDataSource.getUserById(id)
     }
 
+    override suspend fun removeConversation(id: String): RequestState<String?> {
+        return userRemoteDataSource.removeConversation(id)
+    }
+
     suspend fun getMessagesConversation(conversation: String?){
         TODO("vai fazer ainda sapora")
     }
