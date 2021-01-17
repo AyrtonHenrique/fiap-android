@@ -61,9 +61,8 @@ internal constructor(
         botaoResponder.setOnClickListener {
             val bundle = Bundle()
             val mensagens = ArrayList<Mensagem>()
+
             mensagens.addAll(current.mensagagens)
-
-
 
             bundle.putParcelableArrayList("mensagens", mensagens)
 
@@ -72,21 +71,19 @@ internal constructor(
                 //putExtra("MENSAGEM", mensagem)
                 putExtras(bundle)
                 putExtra("REMETENTE", remetente)
-                putExtra("ID_MENSAGEM", idConversa)
+                putExtra("ID_CONVERSA", idConversa)
 //                putExtra("EMAIL_REMETENTE", emailRemetente)
                 if (origemCorretor)
                     putExtra("ORIGEM_CORRETOR", "TRUE")
             }
+
             contexto.startActivity(intent)
         }
 
         botaoApagar.setOnClickListener {
             showDialog(idConversa, remetente)
         }
-        //fabNovoProduto.setOnClickListener {
-        //    val intent = Intent(this@MainActivity, NovoProdutoActivity::class.java)
-        //    startActivityForResult(intent, novoProdutoRequestCode)
-        // }
+
 
     }
 

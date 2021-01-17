@@ -22,12 +22,26 @@ class MessageUseCase(
 
         when (obterDadosUsuarioLogado) {
             is RequestState.Success -> {
+                val usuarioLogado = obterDadosUsuarioLogado.data
+                if(idConversa != "") {
+                    return userRepository.sendMessage(
+                        Mensagem(
+                            usuarioLogado.id,
+                            msg,
+                            "",
+                            usuarioLogado.corretor,
+                            "",
+                            usuarioLogado.name
+                        ),
+                        idConversa
+                    )
+                }
 
                 var corretores = obterCorretores.await()
                 when (corretores) {
                     is RequestState.Success -> {
 
-                        val usuarioLogado = obterDadosUsuarioLogado.data
+
 
                         var corretorSelecionado = corretores.data.random()
 
@@ -36,7 +50,7 @@ class MessageUseCase(
                                 usuarioLogado.id,
                                 msg,
                                 corretorSelecionado.id,
-                                false,
+                                usuarioLogado.corretor,
                                 corretorSelecionado.name,
                                 usuarioLogado.name
                             ),

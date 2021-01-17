@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
@@ -95,21 +97,36 @@ class FalarCorretorActivity : AppCompatActivity() {
     }
 
     private fun recuperaDadosMensagens() {
-//        val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
+        //val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
         val mensagens = intent.extras?.getParcelableArrayList<Mensagem>("mensagens")
+        val ehcorretor = intent.getStringExtra("ORIGEM_CORRETOR")
+
+        tvMensagemEnviada.text = ""
+        var mensagensHtml = ""
 
         mensagens?.forEach {
-            tvMensagemEnviada.text = Html.fromHtml("")
-        }
+            if (ehcorretor == "TRUE") {
+                if (it.enviadoPeloCorretor) {
+                    mensagensHtml += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
+                } else {
+                    mensagensHtml += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
+                }
+            } else {
+                if (!it.enviadoPeloCorretor) {
+                    mensagensHtml += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
+                } else {
+                    mensagensHtml += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
 
-//        if (mensagemParaResponder != null && mensagemParaResponder.length > 0) {
-//            val remetente: String? = intent.getStringExtra("REMETENTE")
-//            tvRemetente.text = "Mensagem enviada de: " + remetente
-//            tvMensagemEnviada.text = mensagemParaResponder.toString()
-//            atualizaListenerBotaoBack()
-//        } else {
-//            tvMensagemEnviada.text = ""
-//        }
+                }
+            }
+        }
+        tvMensagemEnviada
+            .append(
+                HtmlCompat.fromHtml(
+                    mensagensHtml,
+                    FROM_HTML_MODE_LEGACY
+                )
+            )
     }
 
     private fun atualizaListenerBotaoBack() {
@@ -125,7 +142,10 @@ class FalarCorretorActivity : AppCompatActivity() {
             finish()
         }
         btEnviarMensagem.setOnClickListener {
-            messageViewModel.send(tvMensagemParaEnviar.text.toString(), "")
+            messageViewModel.send(
+                tvMensagemParaEnviar.text.toString(),
+                intent.getStringExtra("ID_CONVERSA") ?: ""
+            )
         }
     }
 

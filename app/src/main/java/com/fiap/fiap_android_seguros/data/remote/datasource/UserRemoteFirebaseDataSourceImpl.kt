@@ -7,6 +7,7 @@ import com.fiap.fiap_android_seguros.domain.entity.Conversa
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.domain.entity.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
@@ -97,26 +98,40 @@ class UserRemoteFirebaseDataSourceImpl(
         conversation: String?
     ): RequestState<Void?> {
         return try {
-
-            firebaseFirestore
-                .collection("conversations")
-                .document()
-                .set(
-                    ConversationRequest(
-                        conversation ?: "",
-                        arrayListOf(
+            if (conversation != "" && conversation != null) {
+                firebaseFirestore
+                    .collection("conversations")
+                    .document(conversation)
+                    .update(
+                        "messages", FieldValue.arrayUnion(
                             MessageRequest(
                                 message.enviadoPeloCorretor,
                                 message.textoMensagem,
                                 firebaseAuth.currentUser?.uid
                             )
-                        ),
-                        message.idCorretor,
-                        message.IdCliente,
-                        message.nomeCliente,
-                        message.nomeCorretor
+                        )
                     )
-                )
+            } else {
+                firebaseFirestore
+                    .collection("conversations")
+                    .document()
+                    .set(
+                        ConversationRequest(
+                            conversation ?: "",
+                            arrayListOf(
+                                MessageRequest(
+                                    message.enviadoPeloCorretor,
+                                    message.textoMensagem,
+                                    firebaseAuth.currentUser?.uid
+                                )
+                            ),
+                            message.idCorretor,
+                            message.IdCliente,
+                            message.nomeCliente,
+                            message.nomeCorretor
+                        )
+                    )
+            }
             RequestState.Success(null)
         } catch (e: java.lang.Exception) {
             RequestState.Error(e)
