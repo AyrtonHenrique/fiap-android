@@ -1,7 +1,6 @@
 package com.fiap.fiap_android_seguros.ui.corretor
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,10 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.application.viewmodels.ClientesViewModel
-import com.fiap.fiap_android_seguros.application.viewmodels.MensagensViewModel
-import com.fiap.fiap_android_seguros.ui.mensagens.MensagemListaAdapter
-import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
-import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
 import kotlinx.android.synthetic.main.activity_meus_clientes.*
 
 class MeusClientesActivity : AppCompatActivity() {

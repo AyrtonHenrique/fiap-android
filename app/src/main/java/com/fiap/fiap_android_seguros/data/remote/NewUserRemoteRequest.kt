@@ -7,6 +7,5 @@ data class NewUserRemoteRequest(
     val password: String,
     val address: String,
     val corretor : Boolean,
-    val cliente: Boolean,
     val idade : String
 )

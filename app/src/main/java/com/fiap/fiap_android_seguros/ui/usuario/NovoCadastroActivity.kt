@@ -73,7 +73,6 @@ class NovoCadastroActivity : AppCompatActivity() {
                 nome = etNome.text.toString(),
                 address = etEndereco.text.toString(),
                 idade = etIdade.text.toString(),
-                cliente = swUsuario.isChecked,
                 corretor = swCorretor.isChecked,
                 email = etNomeUsuario.text.toString(),
                 password = etPassword.text.toString()

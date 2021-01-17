@@ -8,26 +8,76 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModel
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModelFactory
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
-import com.fiap.fiap_android_seguros.ui.main.MainActivity
 import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_usuario.*
 
 class UsuarioActivity : AppCompatActivity() {
+
+    private val profileViewModel: ProfileViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ProfileViewModelFactory(
+                GetUserLoggedUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(ProfileViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usuario)
         startListeners()
+
+        iniciarObserver()
+
+        profileViewModel.getInfoUser()
+
+    }
+
+    private fun iniciarObserver() {
+        profileViewModel.userState.observe(this, Observer
+        {
+            when (it) {
+                is RequestState.Success -> {
+                    tvNomeUsuarioLogado.text = it.data.name 
+                    tvIdade.text = it.data.idade + " anos"
+                }
+                is RequestState.Error -> {
+                    tvFeedbackLogin.text = it.throwable.message
+                }
+
+                is RequestState.Loading -> {
+
+                }
+            }
+        })
     }
 
     private fun startListeners() {
-        btSair.setOnClickListener{
+        btSair.setOnClickListener {
             showDialog()
         }
-        btSobre.setOnClickListener{
+        btSobre.setOnClickListener {
             startActivity(Intent(this, SobreActivity::class.java))
             finish()
         }
@@ -70,8 +120,8 @@ class UsuarioActivity : AppCompatActivity() {
         builder.setTitle("Fechar Aplicativo")
         builder.setMessage("Tem certeza que gostaria de fechar a sua sessão?")
 
-        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
-            when(which){
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()

@@ -3,28 +3,87 @@ package com.fiap.fiap_android_seguros.ui.usuario
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
+import com.fiap.fiap_android_seguros.application.usecases.MessageUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.domain.entity.Conversa
+import com.fiap.fiap_android_seguros.domain.entity.Mensagem
+import com.fiap.fiap_android_seguros.presentation.mensagens.MensagemViewModel
+import com.fiap.fiap_android_seguros.presentation.mensagens.MensagemViewModelFactory
 import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_falar_corretor.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 class FalarCorretorActivity : AppCompatActivity() {
+
+    private val messageViewModel: MensagemViewModel by lazy {
+        ViewModelProvider(
+            this,
+            MensagemViewModelFactory(
+                MessageUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    ),
+                    GetUserLoggedUseCase(
+                        UserRepositoryImpl(
+                            (UserRemoteFirebaseDataSourceImpl(
+                                FirebaseAuth.getInstance(),
+                                FirebaseFirestore.getInstance()
+                            ))
+                        )
+                    )
+                )
+            )
+        ).get(MensagemViewModel::class.java)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_falar_corretor)
         startListeners()
         recuperaDadosMensagens()
         validaCorretor()
+        iniciarObserver()
 
+    }
+
+    private fun iniciarObserver() {
+        messageViewModel.messageState.observe(this, Observer {
+            when (it) {
+                is RequestState.Success -> {
+                    tvMensagemParaEnviar.text.clear()
+                }
+                is RequestState.Error -> {
+                    tvFeedbackLogin.text = it.throwable.message
+                }
+                is RequestState.Loading -> {
+
+                }
+
+            }
+        })
     }
 
     private fun validaCorretor() {
         // Valida se o login é de um corretor e adapta o front
         val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
-        if(origemCorretor.equals("TRUE")) {
+        if (origemCorretor.equals("TRUE")) {
             ivHeaderEnviarMensagens.setImageResource(R.drawable.listagem_corretor_header)
             tvFalarCom.text = "Falar com o Cliente"
-            ivVoltar4.setOnClickListener{
+            ivVoltar4.setOnClickListener {
                 val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                     putExtra("ORIGEM_CORRETOR", "TRUE")
                 }
@@ -36,15 +95,21 @@ class FalarCorretorActivity : AppCompatActivity() {
     }
 
     private fun recuperaDadosMensagens() {
-        val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
-        if(mensagemParaResponder!=null && mensagemParaResponder.length> 0) {
-            val remetente: String? = intent.getStringExtra("REMETENTE")
-            tvRemetente.text = "Mensagem enviada de: " + remetente
-            tvMensagemEnviada.text = mensagemParaResponder.toString()
-            atualizaListenerBotaoBack()
-        } else {
-            tvMensagemEnviada.text = ""
+//        val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
+        val mensagens = intent.extras?.getParcelableArrayList<Mensagem>("mensagens")
+
+        mensagens?.forEach {
+            tvMensagemEnviada.text = Html.fromHtml("")
         }
+
+//        if (mensagemParaResponder != null && mensagemParaResponder.length > 0) {
+//            val remetente: String? = intent.getStringExtra("REMETENTE")
+//            tvRemetente.text = "Mensagem enviada de: " + remetente
+//            tvMensagemEnviada.text = mensagemParaResponder.toString()
+//            atualizaListenerBotaoBack()
+//        } else {
+//            tvMensagemEnviada.text = ""
+//        }
     }
 
     private fun atualizaListenerBotaoBack() {
@@ -58,6 +123,9 @@ class FalarCorretorActivity : AppCompatActivity() {
         ivVoltar4.setOnClickListener {
             startActivity(Intent(this, UsuarioActivity::class.java))
             finish()
+        }
+        btEnviarMensagem.setOnClickListener {
+            messageViewModel.send(tvMensagemParaEnviar.text.toString(), "")
         }
     }
 

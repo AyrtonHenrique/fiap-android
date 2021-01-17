@@ -20,19 +20,17 @@ class NewUserViewModel(
         nome: String,
         address: String,
         idade: String,
-        corretor: Boolean,
-        cliente: Boolean
+        corretor: Boolean
     ) {
         viewModelScope.launch {
             registerState.value = createUserUseCase.register(
-                User(
+                User("",
                     nome,
                     email,
                     "",
                     password,
                     address,
                     corretor,
-                    cliente,
                     idade
                 )
             )

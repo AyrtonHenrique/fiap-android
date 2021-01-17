@@ -10,15 +10,66 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.application.viewmodels.MensagensViewModel
+import com.fiap.fiap_android_seguros.application.usecases.GetUserByIdUseCase
+import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
+import com.fiap.fiap_android_seguros.application.usecases.MessageUseCase
+import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModel
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModelFactory
+import com.fiap.fiap_android_seguros.presentation.user.UsuarioViewModel
+import com.fiap.fiap_android_seguros.presentation.user.UsuarioViewModelFactory
 import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
-import kotlinx.android.synthetic.main.activity_sobre.*
+import kotlinx.coroutines.runBlocking
 
 class MensagensEnviadasActivity : AppCompatActivity() {
 
-    private lateinit var mensagensViewModel: MensagensViewModel
+//   private lateinit var mensagensViewModel: ConversasViewModel
+
+    private val mensagensViewModel: ConversasViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ConversasViewModelFactory(
+                MessageUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    ), GetUserLoggedUseCase(
+                        UserRepositoryImpl(
+                            (UserRemoteFirebaseDataSourceImpl(
+                                FirebaseAuth.getInstance(),
+                                FirebaseFirestore.getInstance()
+                            ))
+                        )
+                    )
+                )
+            )
+        ).get(ConversasViewModel::class.java)
+    }
+
+    private val usuarioViewModel: UsuarioViewModel by lazy {
+        ViewModelProvider(
+            this,
+            UsuarioViewModelFactory(
+                GetUserByIdUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(UsuarioViewModel::class.java)
+    }
+
+
     private var origemCorretor: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,18 +86,45 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         val adapter = MensagemListaAdapter(this, origemCorretor)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-        mensagensViewModel = ViewModelProvider(this).get(MensagensViewModel::class.java)
-        mensagensViewModel.mensagens.observe(this, Observer { mensagens ->
-            mensagens?.let { adapter.setMensagens(it) }
+//        mensagensViewModel = ViewModelProvider(this).get(MensagensViewModel::class.java)
+//        mensagensViewModel = ViewModelProvider(
+//            this,
+//            ConversasViewModelFactory(
+//                MessageUseCase(
+//                    UserRepositoryImpl(
+//                        (UserRemoteFirebaseDataSourceImpl(
+//                            FirebaseAuth.getInstance(),
+//                            FirebaseFirestore.getInstance()
+//                        ))
+//                    ), GetUserLoggedUseCase(
+//                        UserRepositoryImpl(
+//                            (UserRemoteFirebaseDataSourceImpl(
+//                                FirebaseAuth.getInstance(),
+//                                FirebaseFirestore.getInstance()
+//                            ))
+//                        )
+//                    )
+//                )
+//            )
+//        ).get(ConversasViewModel::class.java)
+
+        mensagensViewModel.buscaConversas()
+
+        mensagensViewModel.mensagens.observe(this, Observer { conversas ->
+            conversas?.let {
+                adapter.setMensagens(it)
+            }
         })
+
+
     }
 
     private fun validaCorretor() {
         // Valida se o login é de um corretor e adapta o front
-        if(origemCorretor) {
+        if (origemCorretor) {
             ivheader.setImageResource(R.drawable.listagem_corretor_header)
-            linearLayoutMensagensEnviadas.setBackgroundColor( Color.rgb(97, 198, 254))
-            ivVoltar2.setOnClickListener{
+            linearLayoutMensagensEnviadas.setBackgroundColor(Color.rgb(97, 198, 254))
+            ivVoltar2.setOnClickListener {
                 startActivity(Intent(this, CorretorActivity::class.java))
                 finish()
             }

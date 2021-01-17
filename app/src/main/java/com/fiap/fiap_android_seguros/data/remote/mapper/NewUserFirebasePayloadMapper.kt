@@ -8,15 +8,14 @@ import com.fiap.fiap_android_seguros.domain.entity.User
 object NewUserFirebasePayloadMapper {
 
     fun mapToNewUser(newUserFirebasePayload: NewUserFirebasePayload) = User(
+        id = newUserFirebasePayload.id ?: "",
         name = newUserFirebasePayload.name ?: "",
         email = newUserFirebasePayload.email ?: "",
         phone = newUserFirebasePayload.phone ?: "",
         password = newUserFirebasePayload.password ?: "",
         address = newUserFirebasePayload.address ?: "",
         idade = newUserFirebasePayload.idade ?: "",
-        corretor = newUserFirebasePayload.corretor ?: false,
-        cliente = newUserFirebasePayload.cliente ?: false
-
+        corretor = newUserFirebasePayload.corretor ?: false
 
     )
 
@@ -27,8 +26,7 @@ object NewUserFirebasePayloadMapper {
         password = newUser.password,
         address = newUser.address ?: "",
         idade = newUser.idade ?: "",
-        corretor = newUser.corretor ?: false,
-        cliente = newUser.cliente ?: false
+        corretor = newUser.corretor ?: false
     )
 
     fun mapToUser(newUserFirebasePayload: NewUserFirebasePayload) = UserRemoteResponse(

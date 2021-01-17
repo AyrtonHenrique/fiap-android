@@ -1,5 +1,6 @@
 package com.fiap.fiap_android_seguros.data.remote
 
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 
@@ -11,6 +12,7 @@ data class NewUserFirebasePayload(
     val address: String? = null,
     val idade: String? = null,
     val corretor: Boolean? = null,
-    val cliente: Boolean? = null,
+    @DocumentId
+    val id: String? = null,
     @get:Exclude val password: String? = null
 )

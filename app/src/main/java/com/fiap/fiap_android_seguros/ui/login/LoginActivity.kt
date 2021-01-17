@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
 import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.data.remote.UserRemoteResponse
@@ -15,16 +16,18 @@ import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDa
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
 import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
 import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModel
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModelFactory
 import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.NovoCadastroActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_usuario.*
 
 class LoginActivity : AppCompatActivity() {
 
-//    private lateinit var loginViewModel: LoginViewModel
     private val loginViewModel: LoginViewModel by lazy {
         ViewModelProvider(
             this,
@@ -41,6 +44,22 @@ class LoginActivity : AppCompatActivity() {
         ).get(LoginViewModel::class.java)
     }
 
+    private val profileViewModel: ProfileViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ProfileViewModelFactory(
+                GetUserLoggedUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(ProfileViewModel::class.java)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
 
         startListeners()
         iniciarObserver()
+        profileViewModel.getInfoUser()
 
     }
 
@@ -58,10 +78,13 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginState.observe(this, Observer {
             when (it) {
                 is RequestState.Success -> {
-                    val user: UserRemoteResponse = it.data
+                    val user = it.data
                     // Validar se é um corretor ou um usuario normal pra chavear
- //                   startActivity((Intent(this, UsuarioActivity::class.java)))
-                    startActivity((Intent(this, CorretorActivity::class.java)))
+                    if (user.corretor) {
+                        startActivity((Intent(this, CorretorActivity::class.java)))
+                    } else {
+                        startActivity((Intent(this, UsuarioActivity::class.java)))
+                    }
                     finish()
                 }
                 is RequestState.Error -> {
@@ -70,15 +93,25 @@ class LoginActivity : AppCompatActivity() {
                 is RequestState.Loading -> {
 
                 }
-                com.fiap.fiap_android_seguros.data.remote.RequestState.Loading -> TODO()
-                is com.fiap.fiap_android_seguros.data.remote.RequestState.Success -> TODO()
-                is com.fiap.fiap_android_seguros.data.remote.RequestState.Error -> TODO()
+
             }
         })
 
+        profileViewModel.userState.observe(this, Observer
+        {
+            when (it) {
+                is RequestState.Success -> {
+                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                }
+                is RequestState.Error -> {
+                    tvFeedbackLogin.text = it.throwable.message
+                }
+                is RequestState.Loading -> {
+
+                }
+            }
+        })
     }
-
-
 
     private fun startListeners() {
         btEntrar.setOnClickListener {
