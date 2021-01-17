@@ -18,6 +18,8 @@ interface UserRepository {
 
     suspend fun getAllCorretores() : RequestState<Array<User>>
 
+    suspend fun getAllClientes() : RequestState<Array<User>>
+
     suspend fun getAllConversations() : RequestState<List<Conversa>>
 
     suspend fun getUserById(id: String) : RequestState<User>

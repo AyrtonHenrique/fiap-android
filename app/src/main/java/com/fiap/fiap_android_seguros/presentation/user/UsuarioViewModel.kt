@@ -14,7 +14,6 @@ class UsuarioViewModel(
     private val getUserByIdUseCase: GetUserByIdUseCase
 ) : ViewModel() {
     val userState = MutableLiveData<RequestState<User>>()
-
     fun get(
         id: String
     ) {

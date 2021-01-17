@@ -9,8 +9,6 @@ import com.fiap.fiap_android_seguros.domain.entity.Conversa
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.domain.entity.User
 import com.fiap.fiap_android_seguros.domain.repositories.UserRepository
-import com.google.android.gms.tasks.Tasks.await
-import kotlinx.coroutines.runBlocking
 
 class UserRepositoryImpl(
     val userRemoteDataSource: UserRemoteDataSource
@@ -43,7 +41,11 @@ class UserRepositoryImpl(
     }
 
     override suspend fun getAllCorretores(): RequestState<Array<User>> {
-        return userRemoteDataSource.getUsersCorretor()
+        return userRemoteDataSource.GetUsers(true)
+    }
+
+    override suspend fun getAllClientes(): RequestState<Array<User>> {
+        return userRemoteDataSource.GetUsers(false)
     }
 
     override suspend fun getAllConversations(): RequestState<List<Conversa>> {

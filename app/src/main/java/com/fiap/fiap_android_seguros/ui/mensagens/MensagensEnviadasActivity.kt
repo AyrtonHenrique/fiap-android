@@ -49,22 +49,6 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         ).get(ConversasViewModel::class.java)
     }
 
-//    private val usuarioViewModel: UsuarioViewModel by lazy {
-//        ViewModelProvider(
-//            this,
-//            UsuarioViewModelFactory(
-//                GetUserByIdUseCase(
-//                    UserRepositoryImpl(
-//                        (UserRemoteFirebaseDataSourceImpl(
-//                            FirebaseAuth.getInstance(),
-//                            FirebaseFirestore.getInstance()
-//                        ))
-//                    )
-//                )
-//            )
-//        ).get(UsuarioViewModel::class.java)
-//    }
-
 
     private var origemCorretor: Boolean = false
 

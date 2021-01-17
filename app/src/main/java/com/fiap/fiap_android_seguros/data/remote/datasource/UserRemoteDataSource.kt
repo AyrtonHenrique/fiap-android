@@ -17,7 +17,7 @@ interface UserRemoteDataSource {
 
     suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Void?>
 
-    suspend fun getUsersCorretor(): RequestState<Array<User>>
+    suspend fun GetUsers(tipoCorretor: Boolean ): RequestState<Array<User>>
 
     suspend fun getAllConversation(): RequestState<List<Conversa>>
 

@@ -10,14 +10,36 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fiap.fiap_android_seguros.R
-import com.fiap.fiap_android_seguros.application.viewmodels.ClientesViewModel
+import com.fiap.fiap_android_seguros.application.usecases.GetAllClientesUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.clientes.ClientesViewModel
+import com.fiap.fiap_android_seguros.presentation.clientes.ClientesViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_corretor.*
 import kotlinx.android.synthetic.main.activity_meus_clientes.*
 import kotlinx.android.synthetic.main.activity_pesquisar_clientes.*
 
 class PesquisarClientesActivity : AppCompatActivity() {
 
-    private lateinit var clientesViewModel: ClientesViewModel
+    //    private lateinit var clientesViewModel: ClientesViewModel
+    private val clientesViewModel: ClientesViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ClientesViewModelFactory(
+                GetAllClientesUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(ClientesViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +61,17 @@ class PesquisarClientesActivity : AppCompatActivity() {
         val adapter = ClientesListaAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+//        clientesViewModel = ViewModelProvider(this).get(ClientesViewModel::class.java)
+        clientesViewModel.getAllTypeCliente()
+        clientesViewModel.getAllTypeClienteState.observe(this, Observer { clientes ->
+            when (clientes) {
+                is RequestState.Success -> {
+                    clientes.data?.let { adapter.setClientes(it.toList()) }
+                }
+                RequestState.Loading -> TODO()
+                is RequestState.Error -> TODO()
+            }
 
-
-        clientesViewModel = ViewModelProvider(this).get(ClientesViewModel::class.java)
-        clientesViewModel.todosClientes.observe(this, Observer { clientes ->
-            clientes?.let { adapter.setClientes(it) }
         })
     }
 

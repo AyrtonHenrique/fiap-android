@@ -138,7 +138,7 @@ class UserRemoteFirebaseDataSourceImpl(
         }
     }
 
-    override suspend fun getUsersCorretor(): RequestState<Array<User>> {
+    override suspend fun GetUsers(tipoCorretor: Boolean): RequestState<Array<User>> {
 
         val response = firebaseFirestore
             .collection("users")
