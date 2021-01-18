@@ -15,6 +15,7 @@ import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.domain.entity.User
 import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
+import kotlinx.android.synthetic.main.activity_pesquisar_clientes.*
 import java.util.*
 
 class ClientesListaAdapter
@@ -24,9 +25,12 @@ internal constructor(context: Context) :
     private var clientes = emptyList<User>()
     private val contexto = context;
 
+
     inner class ClienteViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val clienteItemView: TextView = itemView.findViewById(R.id.tvClienteItem)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
