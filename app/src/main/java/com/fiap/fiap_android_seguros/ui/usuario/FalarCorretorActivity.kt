@@ -171,7 +171,8 @@ class FalarCorretorActivity : AppCompatActivity() {
             finish()
         }
         btEnviarMensagem.setOnClickListener {
-            if (origemCorretor == "TRUE" && intent.getStringExtra("ID_CONVERSA") == "") {
+            val idconversa = intent.getStringExtra("ID_CONVERSA")
+            if (idconversa.isNullOrEmpty()) {
                 messageViewModel.sendMessageUser(
                     tvMensagemParaEnviar.text.toString(),
                     intent.getStringExtra("id_cliente") ?: ""

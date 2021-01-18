@@ -23,6 +23,7 @@ class MessageUseCase(
         when (obterDadosUsuarioLogado) {
             is RequestState.Success -> {
                 val usuarioLogado = obterDadosUsuarioLogado.data
+
                 if (idConversa != "") {
                     return userRepository.sendMessage(
                         Mensagem(
@@ -31,7 +32,7 @@ class MessageUseCase(
                             "",
                             usuarioLogado.corretor,
                             "",
-                            usuarioLogado.name
+                            ""
                         ),
                         idConversa
                     )
@@ -42,14 +43,20 @@ class MessageUseCase(
                         GlobalScope.async { userRepository.getUserById(idUser) }.await()
                     when (obterDadosUsuarioEnviado) {
                         is RequestState.Success -> {
+                            val usr = obterDadosUsuarioEnviado.data
+                            val nomeCorretor =
+                                if (usuarioLogado.corretor) usuarioLogado.name else usr.name
+                            val nomeCliente =
+                                if (!usuarioLogado.corretor) usuarioLogado.name else usr.name
+
                             return userRepository.sendMessage(
                                 Mensagem(
                                     usuarioLogado.id,
                                     msg,
                                     idUser,
                                     usuarioLogado.corretor,
-                                    obterDadosUsuarioEnviado.data.name,
-                                    usuarioLogado.name
+                                    nomeCorretor,
+                                    nomeCliente
                                 ),
                                 ""
                             )
@@ -87,7 +94,15 @@ class MessageUseCase(
     }
 
     suspend fun GetAllConversations(): RequestState<List<Conversa>> {
-        return userRepository.getAllConversations()
+        val obterDadosUsuarioLogado = GlobalScope.async { getUserLoggedUseCase.userInfo() }.await()
+        when (obterDadosUsuarioLogado) {
+            is RequestState.Success -> {
+                val usuario = obterDadosUsuarioLogado.data
+                return userRepository.getAllConversations(usuario.id, usuario.corretor)
+            }
+            RequestState.Loading -> TODO()
+            is RequestState.Error -> TODO()
+        }
     }
 
     suspend fun RemoveConversation(id: String): RequestState<String?> {

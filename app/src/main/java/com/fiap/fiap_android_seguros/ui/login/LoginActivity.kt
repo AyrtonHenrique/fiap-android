@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // Inicia escondendo o teclado
-        hideKeyboard()
+//        hideKeyboard()
 
         startListeners()
         iniciarObserver()

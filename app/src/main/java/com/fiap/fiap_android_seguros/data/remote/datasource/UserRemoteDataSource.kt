@@ -17,14 +17,14 @@ interface UserRemoteDataSource {
 
     suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Mensagem>
 
-    suspend fun GetUsers(tipoCorretor: Boolean ): RequestState<Array<User>>
+    suspend fun GetUsers(tipoCorretor: Boolean): RequestState<Array<User>>
 
-    suspend fun getAllConversation(): RequestState<List<Conversa>>
+    suspend fun getAllConversation(idUser: String, ehcorretor: Boolean): RequestState<List<Conversa>>
 
-    suspend fun getUserById(id:String) : RequestState<User>
+    suspend fun getUserById(id: String): RequestState<User>
 
-    suspend fun removeConversation (id:String): RequestState<String?>
+    suspend fun removeConversation(id: String): RequestState<String?>
 
-    suspend fun signOut() : RequestState<Void?>
+    suspend fun signOut(): RequestState<Void?>
 
 }

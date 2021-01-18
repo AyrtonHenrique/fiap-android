@@ -36,8 +36,11 @@ class UserRepositoryImpl(
         )
     }
 
-    override suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Mensagem> {
-        return userRemoteDataSource.sendMessage(message,conversation)
+    override suspend fun sendMessage(
+        message: Mensagem,
+        conversation: String?
+    ): RequestState<Mensagem> {
+        return userRemoteDataSource.sendMessage(message, conversation)
     }
 
     override suspend fun getAllCorretores(): RequestState<Array<User>> {
@@ -48,8 +51,11 @@ class UserRepositoryImpl(
         return userRemoteDataSource.GetUsers(false)
     }
 
-    override suspend fun getAllConversations(): RequestState<List<Conversa>> {
-        return userRemoteDataSource.getAllConversation()
+    override suspend fun getAllConversations(
+        idUser: String,
+        ehCorretor: Boolean
+    ): RequestState<List<Conversa>> {
+        return userRemoteDataSource.getAllConversation(idUser, ehCorretor)
     }
 
     override suspend fun getUserById(id: String): RequestState<User> {
@@ -64,7 +70,7 @@ class UserRepositoryImpl(
         return userRemoteDataSource.signOut()
     }
 
-    suspend fun getMessagesConversation(conversation: String?){
+    suspend fun getMessagesConversation(conversation: String?) {
         TODO("vai fazer ainda sapora")
     }
 }

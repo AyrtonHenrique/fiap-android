@@ -14,17 +14,20 @@ interface UserRepository {
 
     suspend fun create(newUser: User): RequestState<UserRemoteResponse>
 
-    suspend fun sendMessage(message: Mensagem, conversation: String?) :RequestState<Mensagem>
+    suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Mensagem>
 
-    suspend fun getAllCorretores() : RequestState<Array<User>>
+    suspend fun getAllCorretores(): RequestState<Array<User>>
 
-    suspend fun getAllClientes() : RequestState<Array<User>>
+    suspend fun getAllClientes(): RequestState<Array<User>>
 
-    suspend fun getAllConversations() : RequestState<List<Conversa>>
+    suspend fun getAllConversations(
+        idUser: String,
+        ehCorretor: Boolean
+    ): RequestState<List<Conversa>>
 
-    suspend fun getUserById(id: String) : RequestState<User>
+    suspend fun getUserById(id: String): RequestState<User>
 
-    suspend fun removeConversation(id : String) : RequestState<String?>
+    suspend fun removeConversation(id: String): RequestState<String?>
 
-    suspend fun signout() : RequestState<Void?>
+    suspend fun signout(): RequestState<Void?>
 }

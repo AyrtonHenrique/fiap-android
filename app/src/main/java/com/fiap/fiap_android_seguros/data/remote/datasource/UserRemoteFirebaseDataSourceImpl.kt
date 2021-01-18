@@ -9,6 +9,7 @@ import com.fiap.fiap_android_seguros.domain.entity.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
@@ -139,7 +140,7 @@ class UserRemoteFirebaseDataSourceImpl(
 
         val response = firebaseFirestore
             .collection("users")
-            .whereEqualTo("corretor", true)
+            .whereEqualTo("corretor", tipoCorretor)
             .get()
             .await()
 
@@ -152,12 +153,27 @@ class UserRemoteFirebaseDataSourceImpl(
         }.toTypedArray())
     }
 
-    override suspend fun getAllConversation(): RequestState<List<Conversa>> {
+    override suspend fun getAllConversation(
+        idUser: String,
+        ehcorretor: Boolean
+    ): RequestState<List<Conversa>> {
         return try {
-            val response = firebaseFirestore
-                .collection("conversations")
-                .get()
-                .await()
+
+            val response: QuerySnapshot
+            if (ehcorretor) {
+                response = firebaseFirestore
+                    .collection("conversations")
+                    .whereEqualTo("idCliente", idUser)
+                    .get()
+                    .await()
+            } else {
+                response = firebaseFirestore
+                    .collection("conversations")
+                    .whereEqualTo("idCorretor", idUser)
+                    .get()
+                    .await()
+            }
+
             val conversas = response.map {
                 val obj = it.toObject(ConversationRequest::class.java)
                 Conversa(

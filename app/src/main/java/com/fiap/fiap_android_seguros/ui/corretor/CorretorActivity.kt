@@ -26,6 +26,9 @@ import kotlinx.android.synthetic.main.activity_corretor.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_usuario.*
 import androidx.lifecycle.Observer
+import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
 
 class CorretorActivity : AppCompatActivity() {
 
@@ -43,6 +46,22 @@ class CorretorActivity : AppCompatActivity() {
                 )
             )
         ).get(ProfileViewModel::class.java)
+    }
+
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(
+            this,
+            LoginViewModelFactory(
+                LoginUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +88,17 @@ class CorretorActivity : AppCompatActivity() {
                 is RequestState.Loading -> {
 
                 }
+            }
+        })
+
+        loginViewModel.signOutState.observe(this, Observer {
+            when (it) {
+                is RequestState.Success -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                RequestState.Loading -> TODO()
+                is RequestState.Error -> TODO()
             }
         })
     }
@@ -151,6 +181,7 @@ class CorretorActivity : AppCompatActivity() {
         val dialogClickListener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
+                    loginViewModel.signOut()
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 }

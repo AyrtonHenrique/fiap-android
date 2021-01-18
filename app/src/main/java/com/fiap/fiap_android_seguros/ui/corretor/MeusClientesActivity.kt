@@ -68,9 +68,7 @@ class MeusClientesActivity : AppCompatActivity() {
             startActivity(Intent(this, CorretorActivity::class.java))
             finish()
         }
-        imageView3.setOnClickListener{
-            
-        }
+
     }
 
 
