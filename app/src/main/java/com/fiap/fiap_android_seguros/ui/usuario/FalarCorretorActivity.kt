@@ -66,8 +66,12 @@ class FalarCorretorActivity : AppCompatActivity() {
         origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
         recuperaDadosMensagens()
 
+        textView19.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        textView20.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO")
+
         validaCorretor()
         iniciarObserver()
+
 
     }
 

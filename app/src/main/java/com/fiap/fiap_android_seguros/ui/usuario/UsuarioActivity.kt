@@ -115,33 +115,53 @@ class UsuarioActivity : AppCompatActivity() {
         }
 
         ivFalarCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
+            val intent = Intent(this, FalarCorretorActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
+            }
+            startActivity(intent)
             finish()
         }
         tvFalarComUmCorretor.setOnClickListener {
             val intent = Intent(this, FalarCorretorActivity::class.java).apply {
-                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text)
-                putExtra("IDADE_CORRETOR_LOGADO", textView8.text)
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
             }
             startActivity(intent)
             finish()
         }
 
         ivPesquisarPlanos.setOnClickListener {
-            startActivity(Intent(this, PesquisarPlanosActivity::class.java))
+            val intent =  Intent(this, PesquisarPlanosActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
+            }
+            startActivity(intent)
             finish()
         }
         tvPesquisarPlano.setOnClickListener {
-            startActivity(Intent(this, PesquisarPlanosActivity::class.java))
+            val intent =  Intent(this, PesquisarPlanosActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
+            }
+            startActivity(intent)
             finish()
         }
 
         ivGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+            val intent =   Intent(this, MensagensEnviadasActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
+            }
+            startActivity(intent)
             finish()
         }
         tvGerenciarMensagens.setOnClickListener {
-            startActivity(Intent(this, MensagensEnviadasActivity::class.java))
+            val intent =   Intent(this, MensagensEnviadasActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeUsuarioLogado.text)
+                putExtra("IDADE_CORRETOR_LOGADO", tvIdade.text)
+            }
+            startActivity(intent)
             finish()
         }
     }

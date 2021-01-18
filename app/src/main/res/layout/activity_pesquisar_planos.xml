@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/user_icon" />
 
     <TextView
-        android:id="@+id/tvNomeUsuario"
+        android:id="@+id/tvNomeUsuarioPlanos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="105dp"
@@ -55,15 +55,15 @@
         app:layout_constraintTop_toTopOf="@+id/ivHeaderPesquisarPlanos" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/tvIdadePlanos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="63 anos"
-        app:layout_constraintEnd_toEndOf="@+id/tvNomeUsuario"
+        app:layout_constraintEnd_toEndOf="@+id/tvNomeUsuarioPlanos"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvNomeUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/tvNomeUsuario" />
+        app:layout_constraintStart_toStartOf="@+id/tvNomeUsuarioPlanos"
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeUsuarioPlanos" />
 
     <TextView
         android:id="@+id/tvEscolhaPlanoDeSaude"

@@ -17,6 +17,10 @@ class PesquisarPlanosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisar_planos)
+
+        tvNomeUsuarioPlanos.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        tvIdadePlanos.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO")
+
         startListeners()
     }
 
