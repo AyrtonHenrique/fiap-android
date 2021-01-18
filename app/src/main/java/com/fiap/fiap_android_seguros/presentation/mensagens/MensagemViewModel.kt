@@ -8,7 +8,7 @@ import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import kotlinx.coroutines.launch
 
-class MensagemViewModel (
+class MensagemViewModel(
     private val messageUseCase: MessageUseCase
 ) : ViewModel() {
 
@@ -17,7 +17,13 @@ class MensagemViewModel (
 
     fun send(msg: String, idConversa: String) {
         viewModelScope.launch {
-            messageState.value = messageUseCase.SendMessage(msg, idConversa)
+            messageState.value = messageUseCase.SendMessage(msg, idConversa, "")
+        }
+    }
+
+    fun sendMessageUser(msg: String, idUser: String) {
+        viewModelScope.launch {
+            messageState.value = messageUseCase.SendMessage(msg, "", idUser)
         }
     }
 

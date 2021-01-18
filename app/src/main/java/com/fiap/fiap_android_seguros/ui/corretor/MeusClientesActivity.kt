@@ -22,6 +22,7 @@ import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModelFa
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_meus_clientes.*
+import kotlinx.android.synthetic.main.clientes_item.*
 
 class MeusClientesActivity : AppCompatActivity() {
 
@@ -66,6 +67,9 @@ class MeusClientesActivity : AppCompatActivity() {
         ivVoltarMeusClientes.setOnClickListener {
             startActivity(Intent(this, CorretorActivity::class.java))
             finish()
+        }
+        imageView3.setOnClickListener{
+            
         }
     }
 

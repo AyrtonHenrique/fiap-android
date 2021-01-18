@@ -11,7 +11,11 @@ class MessageUseCase(
     private val userRepository: UserRepository,
     private val getUserLoggedUseCase: GetUserLoggedUseCase
 ) {
-    suspend fun SendMessage(msg: String, idConversa: String): RequestState<Mensagem> {
+    suspend fun SendMessage(
+        msg: String,
+        idConversa: String,
+        idUser: String
+    ): RequestState<Mensagem> {
 
         val obterDadosUsuarioLogado = GlobalScope.async { getUserLoggedUseCase.userInfo() }.await()
         val obterCorretores = GlobalScope.async { userRepository.getAllCorretores() }
@@ -31,6 +35,29 @@ class MessageUseCase(
                         ),
                         idConversa
                     )
+                }
+
+                if (idUser != "") {
+                    val obterDadosUsuarioEnviado =
+                        GlobalScope.async { userRepository.getUserById(idUser) }.await()
+                    when (obterDadosUsuarioEnviado) {
+                        is RequestState.Success -> {
+                            return userRepository.sendMessage(
+                                Mensagem(
+                                    usuarioLogado.id,
+                                    msg,
+                                    idUser,
+                                    usuarioLogado.corretor,
+                                    obterDadosUsuarioEnviado.data.name,
+                                    usuarioLogado.name
+                                ),
+                                ""
+                            )
+                        }
+                        RequestState.Loading -> TODO()
+                        is RequestState.Error -> TODO()
+                    }
+
                 }
 
                 var corretores = obterCorretores.await()
@@ -57,8 +84,6 @@ class MessageUseCase(
             RequestState.Loading -> TODO()
             is RequestState.Error -> TODO()
         }
-
-
     }
 
     suspend fun GetAllConversations(): RequestState<List<Conversa>> {

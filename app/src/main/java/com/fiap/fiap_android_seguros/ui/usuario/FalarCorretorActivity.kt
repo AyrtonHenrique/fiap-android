@@ -77,7 +77,13 @@ class FalarCorretorActivity : AppCompatActivity() {
                 is RequestState.Success -> {
                     tvMensagemParaEnviar.text.clear()
                     AdicionarNovaMensagem(it.data)
-
+                    if (intent.getStringExtra("ID_CONVERSA")?.isNotEmpty() != true) {
+                        val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
+                            putExtra("ORIGEM_CORRETOR", "TRUE")
+                        }
+                        startActivity(intent)
+                        finish()
+                    }
                 }
                 is RequestState.Error -> {
                     tvFeedbackLogin.text = it.throwable.message
@@ -165,10 +171,18 @@ class FalarCorretorActivity : AppCompatActivity() {
             finish()
         }
         btEnviarMensagem.setOnClickListener {
-            messageViewModel.send(
-                tvMensagemParaEnviar.text.toString(),
-                intent.getStringExtra("ID_CONVERSA") ?: ""
-            )
+            if (origemCorretor == "TRUE" && intent.getStringExtra("ID_CONVERSA") == "") {
+                messageViewModel.sendMessageUser(
+                    tvMensagemParaEnviar.text.toString(),
+                    intent.getStringExtra("id_cliente") ?: ""
+                )
+
+            } else {
+                messageViewModel.send(
+                    tvMensagemParaEnviar.text.toString(),
+                    intent.getStringExtra("ID_CONVERSA") ?: ""
+                )
+            }
         }
 
     }

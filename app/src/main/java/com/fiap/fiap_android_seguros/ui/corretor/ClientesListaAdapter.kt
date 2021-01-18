@@ -18,12 +18,13 @@ import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
 import java.util.*
 
 class ClientesListaAdapter
-    internal constructor(context: Context) : RecyclerView.Adapter<ClientesListaAdapter.ClienteViewHolder>() {
+internal constructor(context: Context) :
+    RecyclerView.Adapter<ClientesListaAdapter.ClienteViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var clientes = emptyList<User>()
     private val contexto = context;
 
-    inner class ClienteViewHolder(itemView: View)  :
+    inner class ClienteViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val clienteItemView: TextView = itemView.findViewById(R.id.tvClienteItem)
     }
@@ -38,15 +39,16 @@ class ClientesListaAdapter
         val current = clientes[position]
         val cliente = current.name
 
-
         holder.clienteItemView.text = cliente
-        //val botaoResponder: ImageView = holder.itemView.findViewById(R.id.ivReply)
+        val botaoResponder: ImageView = holder.itemView.findViewById(R.id.imageView3)
 
-        //botaoResponder.setOnClickListener{
-        //    val intent = Intent(contexto, FalarCorretorActivity::class.java).apply {
-         //   }
-         //   contexto.startActivity(intent)
-        //}
+        botaoResponder.setOnClickListener {
+            val intent = Intent(contexto, FalarCorretorActivity::class.java).apply {
+                putExtra("id_cliente", current.id)
+                putExtra("ORIGEM_CORRETOR","TRUE")
+            }
+            contexto.startActivity(intent)
+        }
 
 
     }
