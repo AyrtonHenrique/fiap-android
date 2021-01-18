@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
@@ -15,15 +16,17 @@ import com.fiap.fiap_android_seguros.application.usecases.MessageUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
-import com.fiap.fiap_android_seguros.domain.entity.Conversa
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.presentation.mensagens.MensagemViewModel
 import com.fiap.fiap_android_seguros.presentation.mensagens.MensagemViewModelFactory
 import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_falar_cliente.*
 import kotlinx.android.synthetic.main.activity_falar_corretor.*
+import kotlinx.android.synthetic.main.activity_falar_corretor.btEnviarMensagem
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.ArrayList
 
 class FalarCorretorActivity : AppCompatActivity() {
 
@@ -51,12 +54,18 @@ class FalarCorretorActivity : AppCompatActivity() {
         ).get(MensagemViewModel::class.java)
     }
 
+    private var mensagens: ArrayList<Mensagem>? = ArrayList<Mensagem>()
+    private var origemCorretor: String? = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_falar_corretor)
         startListeners()
+        mensagens = intent.extras?.getParcelableArrayList<Mensagem>("mensagens")
+        origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
         recuperaDadosMensagens()
+
         validaCorretor()
         iniciarObserver()
 
@@ -67,6 +76,8 @@ class FalarCorretorActivity : AppCompatActivity() {
             when (it) {
                 is RequestState.Success -> {
                     tvMensagemParaEnviar.text.clear()
+                    AdicionarNovaMensagem(it.data)
+
                 }
                 is RequestState.Error -> {
                     tvFeedbackLogin.text = it.throwable.message
@@ -81,10 +92,12 @@ class FalarCorretorActivity : AppCompatActivity() {
 
     private fun validaCorretor() {
         // Valida se o login é de um corretor e adapta o front
-        val origemCorretor = intent.getStringExtra("ORIGEM_CORRETOR")
+
         if (origemCorretor.equals("TRUE")) {
             ivHeaderEnviarMensagens.setImageResource(R.drawable.listagem_corretor_header)
             tvFalarCom.text = "Falar com o Cliente"
+            textView19.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+            textView20.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
             ivVoltar4.setOnClickListener {
                 val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                     putExtra("ORIGEM_CORRETOR", "TRUE")
@@ -97,29 +110,13 @@ class FalarCorretorActivity : AppCompatActivity() {
     }
 
     private fun recuperaDadosMensagens() {
-        //val mensagemParaResponder: String? = intent.getStringExtra("MENSAGEM")
-        val mensagens = intent.extras?.getParcelableArrayList<Mensagem>("mensagens")
-        val ehcorretor = intent.getStringExtra("ORIGEM_CORRETOR")
+//        val ehcorretor = intent.getStringExtra("ORIGEM_CORRETOR")
 
         tvMensagemEnviada.text = ""
         var mensagensHtml = ""
 
-        mensagens?.forEach {
-            if (ehcorretor == "TRUE") {
-                if (it.enviadoPeloCorretor) {
-                    mensagensHtml += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
-                } else {
-                    mensagensHtml += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
-                }
-            } else {
-                if (!it.enviadoPeloCorretor) {
-                    mensagensHtml += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
-                } else {
-                    mensagensHtml += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
+        mensagens?.forEach { mensagensHtml += geraHtmlMensagem(origemCorretor, it) }
 
-                }
-            }
-        }
         tvMensagemEnviada
             .append(
                 HtmlCompat.fromHtml(
@@ -127,6 +124,39 @@ class FalarCorretorActivity : AppCompatActivity() {
                     FROM_HTML_MODE_LEGACY
                 )
             )
+        tvMensagemEnviada.movementMethod = ScrollingMovementMethod()
+    }
+
+    private fun AdicionarNovaMensagem(msg: Mensagem) {
+        tvMensagemEnviada
+            .append(
+                HtmlCompat.fromHtml(
+                    geraHtmlMensagem(origemCorretor, msg),
+                    FROM_HTML_MODE_LEGACY
+                )
+            )
+    }
+
+    private fun geraHtmlMensagem(
+        ehcorretor: String?,
+        it: Mensagem
+    ): String {
+        var mensagensHtml1 = ""
+        if (ehcorretor == "TRUE") {
+            if (it.enviadoPeloCorretor) {
+                mensagensHtml1 += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
+            } else {
+                mensagensHtml1 += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
+            }
+        } else {
+            if (!it.enviadoPeloCorretor) {
+                mensagensHtml1 += "<br/><div style=\"text-align: end !important;\">" + it.textoMensagem + "</div>"
+            } else {
+                mensagensHtml1 += "<br/><span style=\"text-align:left\">" + it.textoMensagem + "</span>"
+
+            }
+        }
+        return mensagensHtml1
     }
 
     private fun startListeners() {

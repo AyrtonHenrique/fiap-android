@@ -15,7 +15,7 @@ interface UserRemoteDataSource {
 
     suspend fun create(newUser: NewUserRemoteRequest): RequestState<UserRemoteResponse>
 
-    suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Void?>
+    suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Mensagem>
 
     suspend fun GetUsers(tipoCorretor: Boolean ): RequestState<Array<User>>
 
@@ -24,5 +24,7 @@ interface UserRemoteDataSource {
     suspend fun getUserById(id:String) : RequestState<User>
 
     suspend fun removeConversation (id:String): RequestState<String?>
+
+    suspend fun signOut() : RequestState<Void?>
 
 }

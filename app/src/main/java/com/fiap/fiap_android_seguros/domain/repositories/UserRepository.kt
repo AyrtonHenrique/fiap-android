@@ -14,7 +14,7 @@ interface UserRepository {
 
     suspend fun create(newUser: User): RequestState<UserRemoteResponse>
 
-    suspend fun sendMessage(message: Mensagem, conversation: String?) :RequestState<Void?>
+    suspend fun sendMessage(message: Mensagem, conversation: String?) :RequestState<Mensagem>
 
     suspend fun getAllCorretores() : RequestState<Array<User>>
 
@@ -25,4 +25,6 @@ interface UserRepository {
     suspend fun getUserById(id: String) : RequestState<User>
 
     suspend fun removeConversation(id : String) : RequestState<String?>
+
+    suspend fun signout() : RequestState<Void?>
 }

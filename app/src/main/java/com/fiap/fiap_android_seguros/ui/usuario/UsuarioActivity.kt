@@ -12,9 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
+import com.fiap.fiap_android_seguros.application.usecases.LoginUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModel
+import com.fiap.fiap_android_seguros.presentation.login.LoginViewModelFactory
 import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModel
 import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModelFactory
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
@@ -22,6 +25,7 @@ import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_corretor.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_usuario.*
 
@@ -43,6 +47,22 @@ class UsuarioActivity : AppCompatActivity() {
         ).get(ProfileViewModel::class.java)
     }
 
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(
+            this,
+            LoginViewModelFactory(
+                LoginUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(LoginViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usuario)
@@ -52,6 +72,18 @@ class UsuarioActivity : AppCompatActivity() {
 
         profileViewModel.getInfoUser()
 
+        loginViewModel.signOutState.observe(this, Observer {
+            when (it) {
+                is RequestState.Success -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+                RequestState.Loading -> TODO()
+                is RequestState.Error -> TODO()
+            }
+        })
+
+
     }
 
     private fun iniciarObserver() {
@@ -59,7 +91,7 @@ class UsuarioActivity : AppCompatActivity() {
         {
             when (it) {
                 is RequestState.Success -> {
-                    tvNomeUsuarioLogado.text = it.data.name 
+                    tvNomeUsuarioLogado.text = it.data.name
                     tvIdade.text = it.data.idade + " anos"
                 }
                 is RequestState.Error -> {
@@ -87,7 +119,11 @@ class UsuarioActivity : AppCompatActivity() {
             finish()
         }
         tvFalarComUmCorretor.setOnClickListener {
-            startActivity(Intent(this, FalarCorretorActivity::class.java))
+            val intent = Intent(this, FalarCorretorActivity::class.java).apply {
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text)
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text)
+            }
+            startActivity(intent)
             finish()
         }
 
@@ -123,8 +159,9 @@ class UsuarioActivity : AppCompatActivity() {
         val dialogClickListener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
+                    loginViewModel.signOut()
+
+
                 }
             }
         }

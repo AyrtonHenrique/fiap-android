@@ -9,18 +9,68 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.fiap.fiap_android_seguros.R
+import com.fiap.fiap_android_seguros.application.usecases.GetUserLoggedUseCase
+import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
+import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModel
+import com.fiap.fiap_android_seguros.presentation.profile.ProfileViewModelFactory
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
 import com.fiap.fiap_android_seguros.ui.mensagens.MensagensEnviadasActivity
 import com.fiap.fiap_android_seguros.ui.sobre.SobreActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_corretor.*
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_usuario.*
+import androidx.lifecycle.Observer
 
 class CorretorActivity : AppCompatActivity() {
+
+    private val profileViewModel: ProfileViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ProfileViewModelFactory(
+                GetUserLoggedUseCase(
+                    UserRepositoryImpl(
+                        (UserRemoteFirebaseDataSourceImpl(
+                            FirebaseAuth.getInstance(),
+                            FirebaseFirestore.getInstance()
+                        ))
+                    )
+                )
+            )
+        ).get(ProfileViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_corretor)
         startListeners()
+        profileViewModel.getInfoUser()
+        iniciarObserver()
+
+    }
+
+    private fun iniciarObserver() {
+        profileViewModel.userState.observe(this, Observer
+        {
+            when (it) {
+                is RequestState.Success -> {
+                    tvNomeCorretor.text = it.data.name
+                    textView8.text = it.data.idade + " anos"
+                }
+                is RequestState.Error -> {
+                    tvFeedbackLogin.text = it.throwable.message
+                }
+
+                is RequestState.Loading -> {
+
+                }
+            }
+        })
     }
 
     private fun startListeners() {
@@ -39,12 +89,14 @@ class CorretorActivity : AppCompatActivity() {
         ivGerenciarMensagensCorretor.setOnClickListener {
             val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text)
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text)
             }
             startActivity(intent)
             finish()
         }
 
-        tvGerenciarMensagensCorretor.setOnClickListener{
+        tvGerenciarMensagensCorretor.setOnClickListener {
             val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
@@ -52,7 +104,7 @@ class CorretorActivity : AppCompatActivity() {
             finish()
         }
 
-        ivPesquisarClientes.setOnClickListener{
+        ivPesquisarClientes.setOnClickListener {
             val intent = Intent(this, PesquisarClientesActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
             }
@@ -96,8 +148,8 @@ class CorretorActivity : AppCompatActivity() {
         builder.setTitle("Fechar Aplicativo")
         builder.setMessage("Tem certeza que gostaria de fechar a sua sessão?")
 
-        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
-            when(which){
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()

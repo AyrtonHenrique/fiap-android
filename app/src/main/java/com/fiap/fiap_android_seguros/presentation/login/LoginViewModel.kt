@@ -17,10 +17,17 @@ class LoginViewModel(
 
 
     val loginState = MutableLiveData<RequestState<User>>()
+    val signOutState = MutableLiveData<RequestState<Void?>>()
 
     fun doLogin(email: String, senha: String) {
         viewModelScope.launch {
             loginState.value = loginUseCase.doLogin(UserLoginRequest(email, senha))
+        }
+    }
+
+    fun signOut(){
+        viewModelScope.launch {
+            signOutState.value = loginUseCase.signOut()
         }
     }
 

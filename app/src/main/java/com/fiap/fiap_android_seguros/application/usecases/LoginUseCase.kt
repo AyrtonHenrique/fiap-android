@@ -27,4 +27,8 @@ class LoginUseCase(
         }
     }
 
+    suspend fun signOut(): RequestState<Void?> {
+        return userRepository.signout()
+    }
+
 }

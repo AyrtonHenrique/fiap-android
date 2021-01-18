@@ -21,6 +21,9 @@ import com.fiap.fiap_android_seguros.ui.corretor.CorretorActivity
 import com.fiap.fiap_android_seguros.ui.usuario.UsuarioActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_corretor.*
+import kotlinx.android.synthetic.main.activity_falar_cliente.*
+import kotlinx.android.synthetic.main.activity_falar_corretor.*
 import kotlinx.android.synthetic.main.activity_mensagens_enviadas.*
 
 class MensagensEnviadasActivity : AppCompatActivity() {
@@ -59,6 +62,11 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         startListeners()
         validaCorretor()
         carregaRecyclerView()
+
+        textView19?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        textView20?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
+        tvNome?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        tvIdade?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
     }
 
     private fun carregaRecyclerView() {

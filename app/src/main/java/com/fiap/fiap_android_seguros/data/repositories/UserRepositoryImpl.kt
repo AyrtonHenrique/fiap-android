@@ -36,7 +36,7 @@ class UserRepositoryImpl(
         )
     }
 
-    override suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Void?> {
+    override suspend fun sendMessage(message: Mensagem, conversation: String?): RequestState<Mensagem> {
         return userRemoteDataSource.sendMessage(message,conversation)
     }
 
@@ -58,6 +58,10 @@ class UserRepositoryImpl(
 
     override suspend fun removeConversation(id: String): RequestState<String?> {
         return userRemoteDataSource.removeConversation(id)
+    }
+
+    override suspend fun signout(): RequestState<Void?> {
+        return userRemoteDataSource.signOut()
     }
 
     suspend fun getMessagesConversation(conversation: String?){

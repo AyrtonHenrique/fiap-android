@@ -11,7 +11,7 @@ class MessageUseCase(
     private val userRepository: UserRepository,
     private val getUserLoggedUseCase: GetUserLoggedUseCase
 ) {
-    suspend fun SendMessage(msg: String, idConversa: String): RequestState<Void?> {
+    suspend fun SendMessage(msg: String, idConversa: String): RequestState<Mensagem> {
 
         val obterDadosUsuarioLogado = GlobalScope.async { getUserLoggedUseCase.userInfo() }.await()
         val obterCorretores = GlobalScope.async { userRepository.getAllCorretores() }
@@ -19,7 +19,7 @@ class MessageUseCase(
         when (obterDadosUsuarioLogado) {
             is RequestState.Success -> {
                 val usuarioLogado = obterDadosUsuarioLogado.data
-                if(idConversa != "") {
+                if (idConversa != "") {
                     return userRepository.sendMessage(
                         Mensagem(
                             usuarioLogado.id,
@@ -36,9 +36,6 @@ class MessageUseCase(
                 var corretores = obterCorretores.await()
                 when (corretores) {
                     is RequestState.Success -> {
-
-
-
                         var corretorSelecionado = corretores.data.random()
 
                         return userRepository.sendMessage(
@@ -68,7 +65,7 @@ class MessageUseCase(
         return userRepository.getAllConversations()
     }
 
-    suspend fun RemoveConversation(id:String) : RequestState<String?>{
+    suspend fun RemoveConversation(id: String): RequestState<String?> {
         return userRepository.removeConversation(id)
     }
 

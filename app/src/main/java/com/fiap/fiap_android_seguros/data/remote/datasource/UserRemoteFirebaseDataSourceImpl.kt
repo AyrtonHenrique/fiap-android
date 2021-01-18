@@ -96,19 +96,20 @@ class UserRemoteFirebaseDataSourceImpl(
     override suspend fun sendMessage(
         message: Mensagem,
         conversation: String?
-    ): RequestState<Void?> {
+    ): RequestState<Mensagem> {
         return try {
+            val mensagemRequest = MessageRequest(
+                message.enviadoPeloCorretor,
+                message.textoMensagem,
+                firebaseAuth.currentUser?.uid
+            )
             if (conversation != "" && conversation != null) {
                 firebaseFirestore
                     .collection("conversations")
                     .document(conversation)
                     .update(
                         "messages", FieldValue.arrayUnion(
-                            MessageRequest(
-                                message.enviadoPeloCorretor,
-                                message.textoMensagem,
-                                firebaseAuth.currentUser?.uid
-                            )
+                            mensagemRequest
                         )
                     )
             } else {
@@ -119,11 +120,7 @@ class UserRemoteFirebaseDataSourceImpl(
                         ConversationRequest(
                             conversation ?: "",
                             arrayListOf(
-                                MessageRequest(
-                                    message.enviadoPeloCorretor,
-                                    message.textoMensagem,
-                                    firebaseAuth.currentUser?.uid
-                                )
+                                mensagemRequest
                             ),
                             message.idCorretor,
                             message.IdCliente,
@@ -132,7 +129,7 @@ class UserRemoteFirebaseDataSourceImpl(
                         )
                     )
             }
-            RequestState.Success(null)
+            RequestState.Success(message)
         } catch (e: java.lang.Exception) {
             RequestState.Error(e)
         }
@@ -217,6 +214,16 @@ class UserRemoteFirebaseDataSourceImpl(
                 .await()
 
             RequestState.Success(id)
+
+        } catch (e: Exception) {
+            RequestState.Error(e)
+        }
+    }
+
+    override suspend fun signOut(): RequestState<Void?> {
+        return try {
+            firebaseAuth?.signOut()
+            RequestState.Success(null)
 
         } catch (e: Exception) {
             RequestState.Error(e)
