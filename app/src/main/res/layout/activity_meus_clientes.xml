@@ -22,6 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageView
@@ -63,16 +64,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textView170" />
 
 
+
         <ImageView
-            android:id="@+id/imageView130"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginTop="95dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.19"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/corretor_icon" />
 
         <TextView
             android:id="@+id/tvMensagensEnviadas"

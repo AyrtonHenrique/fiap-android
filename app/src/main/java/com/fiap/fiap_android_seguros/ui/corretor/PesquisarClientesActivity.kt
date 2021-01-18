@@ -18,8 +18,6 @@ import com.fiap.fiap_android_seguros.presentation.clientes.ClientesViewModel
 import com.fiap.fiap_android_seguros.presentation.clientes.ClientesViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_corretor.*
-import kotlinx.android.synthetic.main.activity_meus_clientes.*
 import kotlinx.android.synthetic.main.activity_pesquisar_clientes.*
 
 class PesquisarClientesActivity : AppCompatActivity() {
@@ -44,6 +42,9 @@ class PesquisarClientesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisar_clientes)
+
+        tvPesquisarClientes.text =  intent.getStringExtra("NOME_CORRETOR_LOGADO").toString()
+        textView18Pesquisar.text =  intent.getStringExtra("IDADE_CORRETOR_LOGADO").toString()
 
         startListeners()
         carregaRecyclerView()

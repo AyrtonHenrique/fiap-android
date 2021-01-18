@@ -119,8 +119,8 @@ class CorretorActivity : AppCompatActivity() {
         ivGerenciarMensagensCorretor.setOnClickListener {
             val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
-                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text)
-                putExtra("IDADE_CORRETOR_LOGADO", textView8.text)
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()
@@ -129,6 +129,8 @@ class CorretorActivity : AppCompatActivity() {
         tvGerenciarMensagensCorretor.setOnClickListener {
             val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()
@@ -137,6 +139,8 @@ class CorretorActivity : AppCompatActivity() {
         ivPesquisarClientes.setOnClickListener {
             val intent = Intent(this, PesquisarClientesActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()
@@ -145,6 +149,8 @@ class CorretorActivity : AppCompatActivity() {
         tvPesquisarClientes.setOnClickListener {
             val intent = Intent(this, PesquisarClientesActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()
@@ -153,6 +159,8 @@ class CorretorActivity : AppCompatActivity() {
         ivMeusClientes.setOnClickListener {
             val intent = Intent(this, MeusClientesActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()
@@ -161,6 +169,8 @@ class CorretorActivity : AppCompatActivity() {
         tvMeusClientes.setOnClickListener {
             val intent = Intent(this, MeusClientesActivity::class.java).apply {
                 putExtra("ORIGEM_CORRETOR", "TRUE")
+                putExtra("NOME_CORRETOR_LOGADO", tvNomeCorretor.text.toString())
+                putExtra("IDADE_CORRETOR_LOGADO", textView8.text.toString())
             }
             startActivity(intent)
             finish()

@@ -21,6 +21,7 @@ import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModel
 import com.fiap.fiap_android_seguros.presentation.mensagens.ConversasViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_corretor.*
 import kotlinx.android.synthetic.main.activity_meus_clientes.*
 import kotlinx.android.synthetic.main.clientes_item.*
 
@@ -47,6 +48,10 @@ class MeusClientesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meus_clientes)
+
+        textView170.text =  intent.getStringExtra("NOME_CORRETOR_LOGADO").toString()
+        textView18.text =  intent.getStringExtra("IDADE_CORRETOR_LOGADO").toString()
+
         startListeners()
         carregaRecyclerView()
     }

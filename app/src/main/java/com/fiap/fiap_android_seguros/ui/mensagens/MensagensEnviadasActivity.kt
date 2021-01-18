@@ -63,10 +63,13 @@ class MensagensEnviadasActivity : AppCompatActivity() {
         validaCorretor()
         carregaRecyclerView()
 
-        textView19?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
-        textView20?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
-        tvNome?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
-        tvIdade?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
+        textView17.text = intent.getStringExtra("NOME_CORRETOR_LOGADO").toString()
+        textView18.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO").toString()
+
+        //textView19?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        //textView20?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
+        //tvNome?.text = intent.getStringExtra("NOME_CORRETOR_LOGADO")
+        //tvIdade?.text = intent.getStringExtra("IDADE_CORRETOR_LOGADO") + " anos"
     }
 
     private fun carregaRecyclerView() {
