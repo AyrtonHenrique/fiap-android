@@ -25,8 +25,6 @@ https://www.figma.com/proto/1X2yhIfKdpLTL5tJCSzkL1/Untitled?node-id=1%3A2&scalin
 
 ### Modelagem das estruturas de dados
 
-![Diagrama em branco](https://user-images.githubusercontent.com/67294168/102129921-e23d0680-3e2e-11eb-9839-cf5975dbeba2.png)
-
 Os dados dos usuários são persistidos em um banco de dados dentro do Firebase, a Cloud Firestore. Nesta base, as estruturas de dados são gravadas em coleções com chaves separando cada uma e estruturas de {chave}={valor} para gravar os atributos.
 
 Assim, foram criadas duas coleções a saber, sendo elas: 
