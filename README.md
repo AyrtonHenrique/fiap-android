@@ -14,7 +14,7 @@ O objetivo macro foi fazer um aplicativo capaz de gerenciar um logon, criar usu�
 
 ## Desenho Básico da Solução
 
-![trabalho_android](https://user-images.githubusercontent.com/67294168/104974261-1aa7a580-59d6-11eb-88cc-2c5def832078.png)
+![trabalho_android_final](https://user-images.githubusercontent.com/67294168/104974632-5ee77580-59d7-11eb-9e7a-47a07c12f22a.png)
 
 ## Prototipação no Figma
 
