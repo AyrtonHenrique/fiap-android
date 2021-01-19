@@ -14,7 +14,7 @@ O objetivo macro foi fazer um aplicativo capaz de gerenciar um logon, criar usu�
 
 ## Desenho Básico da Solução
 
-![trabalho_final_ws](https://user-images.githubusercontent.com/67294168/102436654-d0f32600-3ff7-11eb-84c7-5bfdee50beba.png)
+![trabalho_android](https://user-images.githubusercontent.com/67294168/104974261-1aa7a580-59d6-11eb-88cc-2c5def832078.png)
 
 ## Prototipação no Figma
 
@@ -35,14 +35,13 @@ Assim, foram criadas duas coleções a saber, sendo elas:
     Conversations --> Responsável por guardar os dados das mensagens enviadas e conversas  por usuários (clientes e corretores).
 
 
-
 ## Frontend da Aplicação
 
   Para este desenvolvimento, foram desenvolvidas várias telas para permitir a interação descrita na solução.
   
   Seguem alguns prints das mesmas abaixo: 
   
-  
+  ![prints](https://user-images.githubusercontent.com/67294168/104974472-ed0f2c00-59d6-11eb-9fe7-d7c8eddfd03b.png)
 
 ## Conclusão
 
