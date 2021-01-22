@@ -83,7 +83,7 @@ class FalarCorretorActivity : AppCompatActivity() {
                     AdicionarNovaMensagem(it.data)
                     if (intent.getStringExtra("ID_CONVERSA")?.isNotEmpty() != true) {
                         val intent = Intent(this, MensagensEnviadasActivity::class.java).apply {
-                            //putExtra("ORIGEM_CORRETOR", "TRUE")
+                            putExtra("ORIGEM_CORRETOR", origemCorretor)
                             putExtra("NOME_CORRETOR_LOGADO", textView19.text.toString())
                             putExtra("IDADE_CORRETOR_LOGADO", textView20.text.toString())
                         }

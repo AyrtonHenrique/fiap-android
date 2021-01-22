@@ -10,6 +10,7 @@ import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.ui.login.LoginActivity
 import com.fiap.fiap_android_seguros.application.usecases.CreateUserUseCase
 import com.fiap.fiap_android_seguros.data.remote.RequestState
+import com.fiap.fiap_android_seguros.data.remote.UserRemoteResponse
 import com.fiap.fiap_android_seguros.data.remote.datasource.UserRemoteFirebaseDataSourceImpl
 import com.fiap.fiap_android_seguros.data.repositories.UserRepositoryImpl
 import com.fiap.fiap_android_seguros.presentation.newUser.NewUserViewModel
@@ -48,7 +49,7 @@ class NovoCadastroActivity : AppCompatActivity() {
         newUserViewModel.registerState.observe(this, Observer {
             when (it) {
                 is RequestState.Success -> {
-                    startActivity((Intent(this, UsuarioActivity::class.java)))
+                    startActivity((Intent(this, LoginActivity::class.java)))
                     finish()
                 }
                 is RequestState.Error -> {

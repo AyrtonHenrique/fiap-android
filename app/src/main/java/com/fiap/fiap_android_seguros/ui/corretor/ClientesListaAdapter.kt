@@ -15,6 +15,8 @@ import com.fiap.fiap_android_seguros.R
 import com.fiap.fiap_android_seguros.domain.entity.Mensagem
 import com.fiap.fiap_android_seguros.domain.entity.User
 import com.fiap.fiap_android_seguros.ui.usuario.FalarCorretorActivity
+import kotlinx.android.synthetic.main.activity_falar_corretor.*
+import kotlinx.android.synthetic.main.activity_meus_clientes.*
 import kotlinx.android.synthetic.main.activity_pesquisar_clientes.*
 import java.util.*
 

@@ -81,7 +81,10 @@ class LoginActivity : AppCompatActivity() {
                     val user = it.data
                     // Validar se é um corretor ou um usuario normal pra chavear
                     if (user.corretor) {
-                        startActivity((Intent(this, CorretorActivity::class.java)))
+                        val intent = Intent(this, CorretorActivity::class.java).apply {
+                            putExtra("ORIGEM_CORRETOR", "TRUE")
+                        }
+                        startActivity(intent)
                     } else {
                         startActivity((Intent(this, UsuarioActivity::class.java)))
                     }
